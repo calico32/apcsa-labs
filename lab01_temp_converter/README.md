@@ -8,6 +8,8 @@
 
 ## Running
 
+[![Run on Repl.it](https://repl.it/badge/github/wiisportsresort/apcsa-labs)](https://repl.it/@wiisportsresort/apcsa-labs)
+
 Run from this directory:
 ```bash
 make
