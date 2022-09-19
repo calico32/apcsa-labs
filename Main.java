@@ -4,9 +4,11 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import lab01_temp_converter.TempConverter;
+
 import shared.TextBuilder;
 import shared.TextHelpers;
+
+import lab01_temp_converter.TempConverter;
 
 class Main extends TextHelpers {
   static final HashMap<String, Class<?>> classes = new HashMap<>();

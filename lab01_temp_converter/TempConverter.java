@@ -2,6 +2,7 @@ package lab01_temp_converter;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 import shared.TextBuilder;
 import shared.TextHelpers;
 
