@@ -25,24 +25,27 @@ enum TempUnit {
       return value;
     }
 
-    if (this == F) {
-      if (to == C) {
-        return f_c(value);
-      } else if (to == K) {
-        return f_k(value);
-      }
-    } else if (this == C) {
-      if (to == F) {
-        return c_f(value);
-      } else if (to == K) {
-        return c_k(value);
-      }
-    } else if (this == K) {
-      if (to == F) {
-        return k_f(value);
-      } else if (to == C) {
-        return k_c(value);
-      }
+    // analysis tool angery if all cases not covered, so f -> f, c -> c, etc
+    // are included
+    switch (this) {
+      case F:
+        switch (to) {
+          case F: return value;
+          case C: return f_c(value);
+          case K: return f_k(value);
+        }
+      case C:
+        switch (to) {
+          case F: return c_f(value);
+          case C: return value;
+          case K: return c_k(value);
+        }
+      case K:
+        switch (to) {
+          case F: return k_f(value);
+          case C: return k_c(value);
+          case K: return value;
+        }
     }
 
     throw new IllegalArgumentException(
