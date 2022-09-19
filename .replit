@@ -1,0 +1,11 @@
+run = "make"
+hidden = ["build", ".*", "**/Makefile", "LICENSE", "**/*.class"]
+
+[languages.java]
+pattern = "**/*.java"
+
+[languages.java.languageServer]
+start = ["jdt-language-server"]
+
+[nix]
+channel = "stable-21_11"
