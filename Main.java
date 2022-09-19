@@ -38,7 +38,7 @@ class Main extends TextHelpers {
     try {
       int choice            = scanner.nextInt();
       Class<?> programClass = classes.get(choices.get(choice - 1));
-      System.out.print("\n\n");
+      TextBuilder.print(text("\n---------------\n\n").dim());
       programClass.getMethod("main", String[].class).invoke(null, (Object)args);
     } catch (IndexOutOfBoundsException e) {
       TextBuilder.println(text("\nInvalid choice.").red());
