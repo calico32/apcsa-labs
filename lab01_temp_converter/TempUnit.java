@@ -10,8 +10,8 @@ enum TempUnit {
   final String[] aliases;
 
   TempUnit(String name, String symbol, String... aliases) {
-    this.name = name;
-    this.symbol = symbol;
+    this.name    = name;
+    this.symbol  = symbol;
     this.aliases = aliases;
   }
 
@@ -45,8 +45,9 @@ enum TempUnit {
       }
     }
 
-    throw new IllegalArgumentException("Cannot convert from " + this + " to " +
-                                       to);
+    throw new IllegalArgumentException(
+      "Cannot convert from " + this + " to " + to
+    );
   }
 
   static TempUnit fromString(String s) {
