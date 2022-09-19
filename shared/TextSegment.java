@@ -44,11 +44,13 @@ public class TextSegment {
 
   // Styles
   public static final String BOLD          = "\033[1m";
+  public static final String DIM           = "\033[2m";
   public static final String ITALIC        = "\033[3m";
   public static final String UNDERLINE     = "\033[4m";
   public static final String STRIKETHROUGH = "\033[9m";
 
   public TextSegment bold() { return style(BOLD); }
+  public TextSegment dim() { return style(DIM); }
   public TextSegment italic() { return style(ITALIC); }
   public TextSegment underline() { return style(UNDERLINE); }
   public TextSegment strikethrough() { return style(STRIKETHROUGH); }
