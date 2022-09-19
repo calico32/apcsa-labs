@@ -1,0 +1,6 @@
+BasedOnStyle: LLVM
+IndentWidth: 2
+AlignAfterOpenBracket: BlockIndent
+BinPackArguments: false
+ContinuationIndentWidth: 2
+AlignConsecutiveAssignments: true
