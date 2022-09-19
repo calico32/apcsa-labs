@@ -53,7 +53,7 @@ public class TempConverter extends TextHelpers {
       String to;
 
       if (parts.length == 4) {
-        if (!parts[2].equals("to")) {
+        if (!parts[2].equalsIgnoreCase("to")) {
           TextBuilder.println(text("Invalid input: expected \"to\".").red());
           continue;
         }
@@ -61,7 +61,7 @@ public class TempConverter extends TextHelpers {
         from = parts[0] + parts[1];
         to   = parts[3];
       } else if (parts.length == 3) {
-        if (!parts[1].equals("to")) {
+        if (!parts[1].equalsIgnoreCase("to")) {
           TextBuilder.println(text("Invalid input: expected \"to\".").red());
           continue;
         }
@@ -82,7 +82,7 @@ public class TempConverter extends TextHelpers {
       }
 
       try {
-        String fromValueString = from.replaceAll("[^0-9.]", "");
+        String fromValueString = from.replaceAll("[^0-9.-]", "");
         String fromUnitString  = from.replaceAll("[^a-zA-Z]", "");
 
         double fromValue  = Double.parseDouble(fromValueString);
