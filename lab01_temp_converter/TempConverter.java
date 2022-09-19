@@ -3,20 +3,32 @@ package lab01_temp_converter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import shared.TextBuilder;
+import shared.TextHelpers;
 
-public class TempConverter {
-  static TextBuilder text(String text) { return new TextBuilder(text); }
-
+public class TempConverter extends TextHelpers {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
 
-    text("Temperature converter").whiteBold().print();
+    TextBuilder.println(text("Temperature converter").randomRainbow().bold());
 
-    System.out.println(
-        "Type a conversion expression, such as \"30f to c\" or \"320 kelvin to fahrenheit\".");
-    System.out.println("Type \"q\" or \"quit\" to exit.\n");
+    TextBuilder.println(
+      text("Type a conversion expression, such as "),
+      text("30f to c").bold(),
+      text(" or "),
+      text("320 kelvin to fahrenheit").bold(),
+      text(".")
+    );
+
+    TextBuilder.println(
+      text("Type "),
+      text("q").bold(),
+      text(" or "),
+      text("quit").bold(),
+      text(" to exit.\n")
+    );
+
     while (true) {
-      System.out.print(text("> ").blueBold());
+      TextBuilder.print(text("> ").blue().bold());
 
       String input;
       try {
@@ -41,44 +53,60 @@ public class TempConverter {
 
       if (parts.length == 4) {
         if (!parts[2].equals("to")) {
-          text("Invalid input: expected \"to\".").red().print();
+          TextBuilder.println(text("Invalid input: expected \"to\".").red());
           continue;
         }
 
         from = parts[0] + parts[1];
-        to = parts[3];
+        to   = parts[3];
       } else if (parts.length == 3) {
         if (!parts[1].equals("to")) {
-          text("Invalid input: expected \"to\".").red().print();
+          TextBuilder.println(text("Invalid input: expected \"to\".").red());
           continue;
         }
         from = parts[0];
-        to = parts[2];
+        to   = parts[2];
       } else {
-        text(
-            "Invalid input: expected \"<num> <unit> to <unit>\" or \"<num><unit> to <unit>\".")
-            .red()
-            .print();
+        new TextBuilder(
+          text("Invalid input: expected "),
+          text("<num> <unit> to <unit>").bold(),
+          text(" or "),
+          text("<num><unit> to <unit>").bold(),
+          text(".")
+        )
+          .red()
+          .println();
+
         continue;
       }
 
       try {
-        double fromValue =
-            Double.parseDouble(from.substring(0, from.length() - 1));
+        String fromValueString = from.replaceAll("[^0-9.]", "");
+        String fromUnitString  = from.replaceAll("[^a-zA-Z]", "");
 
-        TempUnit fromUnit =
-            TempUnit.fromString(from.substring(from.length() - 1));
+        double fromValue  = Double.parseDouble(fromValueString);
+        TempUnit fromUnit = TempUnit.fromString(fromUnitString);
+
         TempUnit toUnit = TempUnit.fromString(to);
 
         double toValue = fromUnit.convert(fromValue, toUnit);
 
-        System.out.printf("%.2f%s = %.2f%s\n", fromValue, fromUnit, toValue,
-                          toUnit);
+        TextBuilder.println(
+          text("%.2f", fromValue).blue().bold(),
+          text(" "),
+          text(fromUnit),
+          text(" = ").cyan(),
+          text("%.2f", toValue).green().bold(),
+          text(" "),
+          text(toUnit),
+          text("\n")
+        );
+
       } catch (NumberFormatException e) {
-        text("Invalid number.").red().print();
+        TextBuilder.println(text("Invalid number.").red());
         continue;
       } catch (IllegalArgumentException e) {
-        text(e.getMessage()).red().print();
+        TextBuilder.println(text(e.getMessage()).red());
         continue;
       }
     }
