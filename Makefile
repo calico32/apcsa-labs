@@ -5,7 +5,7 @@ endif
 
 LABS = $(wildcard lab*)
 
-.PHONY: run build $(LABS)
+.PHONY: run build clean $(LABS)
 
 run: build
 	${MAKE} _run
@@ -15,6 +15,9 @@ _run:
 
 build:
 	javac -d build Main.java
+
+clean:
+	rm -rf build
 
 $(LABS): %:
 	${MAKE} -C $* run
