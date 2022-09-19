@@ -24,10 +24,11 @@ public class TempConverter extends TextHelpers {
       text("q").bold(),
       text(" or "),
       text("quit").bold(),
-      text(" to exit.\n")
+      text(" to exit.")
     );
 
     while (true) {
+      System.out.println();
       TextBuilder.print(text("> ").blue().bold());
 
       String input;
@@ -98,8 +99,7 @@ public class TempConverter extends TextHelpers {
           text(" = ").cyan(),
           text("%.2f", toValue).green().bold(),
           text(" "),
-          text(toUnit),
-          text("\n")
+          text(toUnit)
         );
 
       } catch (NumberFormatException e) {
