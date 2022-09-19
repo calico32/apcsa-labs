@@ -2,11 +2,13 @@ ifndef VERBOSE
   .SILENT:
 endif
 
-.PHONY: run
-run:
-	javac -cp .. -d ../build TempConverter.java
+.PHONY: run build watch
+
+run: build
 	java -cp ../build lab01_temp_converter.TempConverter
 
-.PHONY: watch
+build:
+	javac -cp .. -d ../build TempConverter.java
+
 watch:
 	watchexec -e java -- ${MAKE} run

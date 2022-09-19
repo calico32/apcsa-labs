@@ -3,15 +3,18 @@ ifndef VERBOSE
   .SILENT:
 endif
 
-.PHONY: main
-run:
-	javac -d build Main.java && java -cp build Main
+LABS = $(wildcard lab*)
 
-.PHONY: build
+.PHONY: run build $(LABS)
+
+run: build
+	${MAKE} _run
+
+_run:
+	java -cp build Main
+
 build:
 	javac -d build Main.java
 
-LABS = $(wildcard lab*)
-.PHONY: $(LABS)
 $(LABS): %:
 	${MAKE} -C $* run
