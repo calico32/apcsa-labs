@@ -8,8 +8,13 @@
 
 ## Running
 
+Run from this directory:
+```bash
+make
+```
+
 Run from repo root:
 
 ```bash
-javac -d build lab01_temp_converter/TempConverter.java && java -cp build lab01_temp_converter.TempConverter
+make lab01_temp_converter
 ```

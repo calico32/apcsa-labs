@@ -5,5 +5,12 @@ for class
 ## Running
 
 ```bash
-javac -d build Main.java && java -cp build Main
+make
+```
+
+Individual labs:
+
+```bash
+make lab01_temp_converter
+make lab02_...
 ```
