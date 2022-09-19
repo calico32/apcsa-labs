@@ -32,7 +32,7 @@ public class TempConverter extends TextHelpers {
 
       String input;
       try {
-        input = scanner.nextLine();
+        input = scanner.nextLine().trim();
       } catch (NoSuchElementException e) {
         // EOF
         break;
