@@ -6,6 +6,7 @@ ContinuationIndentWidth: 2
 AlignConsecutiveAssignments: true
 AllowShortCaseLabelsOnASingleLine: true
 IndentCaseLabels: true
+ColumnLimit: 90
 JavaImportGroups:
   - java
   - shared

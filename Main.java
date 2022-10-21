@@ -9,14 +9,16 @@ import shared.TextBuilder;
 import shared.TextHelpers;
 
 import lab01_temp_converter.TempConverter;
+import lab02_number_cubes.LibreYachts;
 
 class Main extends TextHelpers {
-  static final HashMap<String, Class<?>> classes = new HashMap<>();
+  static final HashMap<String, Class<?>> programs = new HashMap<>();
 
   // menu
   static {
-    classes.put("Temperature converter", TempConverter.class);
-    classes.put("Exit", Exit.class);
+    programs.put("Temperature converter", TempConverter.class);
+    programs.put("LibreYachts (open Yahtzee™ clone)", LibreYachts.class);
+    programs.put("Exit", Exit.class);
   }
 
   public static void main(String[] args) throws NoSuchMethodException {
@@ -26,12 +28,10 @@ class Main extends TextHelpers {
 
     int choiceNumber     = 0;
     List<String> choices = new ArrayList<>();
-    for (String name : classes.keySet()) {
+    for (String name : programs.keySet()) {
       choices.add(name);
 
-      TextBuilder.println(
-        text(String.valueOf(choiceNumber++ + 1)).white(), text(". " + name)
-      );
+      TextBuilder.println(text(String.valueOf(choiceNumber++ + 1)).white(), text(". " + name));
     }
 
     System.out.println();
@@ -39,7 +39,7 @@ class Main extends TextHelpers {
 
     try {
       int choice            = scanner.nextInt();
-      Class<?> programClass = classes.get(choices.get(choice - 1));
+      Class<?> programClass = programs.get(choices.get(choice - 1));
       TextBuilder.print(text("\n---------------\n\n").dim());
       programClass.getMethod("main", String[].class).invoke(null, (Object)args);
     } catch (IndexOutOfBoundsException e) {
@@ -49,9 +49,7 @@ class Main extends TextHelpers {
     } catch (NoSuchElementException e) {
       // EOF, do nothing
     } catch (NoSuchMethodException e) {
-      TextBuilder.println(
-        text("\nError: Program class does not have a main method.").red()
-      );
+      TextBuilder.println(text("\nError: Program class does not have a main method.").red());
       scanner.close();
       throw e;
     } catch (Exception e) {

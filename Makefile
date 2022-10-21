@@ -21,3 +21,9 @@ clean:
 
 $(LABS): %:
 	${MAKE} -C $* run
+
+run-test: build-test
+	java -cp build Test
+
+build-test:
+	javac -d build Test.java
