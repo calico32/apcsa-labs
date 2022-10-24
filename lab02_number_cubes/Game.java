@@ -402,10 +402,11 @@ public class Game extends TextHelpers {
   }
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    Game ui = new Game();
-    ui.run();
+    Game game = new Game();
+    game.run();
   }
 
+  @SuppressWarnings("unchecked")
   boolean handleMenuNavigation(Console.KeyCode key, Enum<?>[] options) {
     if (key == null)
       return false;
