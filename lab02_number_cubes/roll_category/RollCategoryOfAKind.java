@@ -6,8 +6,8 @@ import lab02_number_cubes.NumberCube;
 public class RollCategoryOfAKind extends RollCategory {
   public final int targetCount;
 
-  public RollCategoryOfAKind(String name, int targetCount) {
-    super(name);
+  public RollCategoryOfAKind(String name, String scoring, int targetCount) {
+    super(name, scoring);
     this.targetCount = targetCount;
   }
 

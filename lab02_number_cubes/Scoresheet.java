@@ -27,17 +27,17 @@ public class Scoresheet extends TextHelpers {
     RollCategory.CHANCE,
   };
 
-  HashMap<RollCategory, Integer> upperSection = new HashMap<>();
-  HashMap<RollCategory, Integer> lowerSection = new HashMap<>();
-
-  int nameWidth;
-  int width;
+  public final HashMap<RollCategory, Integer> upperSection = new HashMap<>();
+  public final HashMap<RollCategory, Integer> lowerSection = new HashMap<>();
 
   static final int scoreWidth = 5;
-
   final Table t;
 
+  public RollCategory selectedCategory = null;
+
   public Scoresheet() {
+    int nameWidth = 0;
+
     for (RollCategory category : UPPER_SECTION) {
       nameWidth = Math.max(nameWidth, category.name.length());
     }
@@ -47,14 +47,15 @@ public class Scoresheet extends TextHelpers {
 
     nameWidth += 12;
 
-    width = 2            // "| "
-            + nameWidth  // names
-            + 3          // " | "
-            + scoreWidth // scores
-            + 2;         // " |"
-
     t = new Table(nameWidth, scoreWidth);
   }
+
+  public void clear() {
+    upperSection.clear();
+    lowerSection.clear();
+  }
+
+  public void select(RollCategory category) { selectedCategory = category; }
 
   public String draw() {
     t.clear();
@@ -64,7 +65,19 @@ public class Scoresheet extends TextHelpers {
     t.divider("├", "┬", "┤");
 
     for (RollCategory category : UPPER_SECTION) {
-      t.row(category.name, upperSection.getOrDefault(category, -1));
+      if (selectedCategory == category) {
+        t.select().scoreRow(
+          text(category.name).blue().bold(),
+          text(category.scoring).dim(),
+          upperSection.getOrDefault(category, -1)
+        );
+      } else {
+        t.scoreRow(
+          text(category.name),
+          text(category.scoring).dim(),
+          upperSection.getOrDefault(category, -1)
+        );
+      }
     }
 
     t.divider("├", "┼", "┤");
@@ -73,14 +86,30 @@ public class Scoresheet extends TextHelpers {
       upperTotal += entry.getValue();
     }
 
-    t.row("Upper Total", upperTotal);
-    t.row("Bonus", "total ≥ 63", Integer.toString(upperTotal >= 63 ? 35 : 0));
+    t.row(text("Upper Total").bold(), text(upperTotal).bold());
+    t.row(
+      text("Bonus").bold(),
+      text("total ≥ 63 → 35 pts").dim(),
+      text(upperTotal >= 63 ? 35 : 0).bold()
+    );
     t.divider("├", "┴", "┤");
 
-    t.row("Lower Section");
+    t.row(text("Lower Section").bold());
     t.divider("├", "┬", "┤");
     for (RollCategory category : LOWER_SECTION) {
-      t.row(category.name, lowerSection.getOrDefault(category, -1));
+      if (selectedCategory == category) {
+        t.select().scoreRow(
+          text(category.name).blue().bold(),
+          text(category.scoring).dim(),
+          lowerSection.getOrDefault(category, -1)
+        );
+      } else {
+        t.scoreRow(
+          text(category.name),
+          text(category.scoring).dim(),
+          lowerSection.getOrDefault(category, -1)
+        );
+      }
     }
     t.divider("├", "┼", "┤");
 
@@ -89,9 +118,9 @@ public class Scoresheet extends TextHelpers {
       lowerTotal += entry.getValue();
     }
 
-    t.row("Lower Total", lowerTotal);
+    t.row(text("Lower Total").bold(), text(lowerTotal).bold());
     t.divider("├", "┼", "┤");
-    t.row("Grand Total", upperTotal + lowerTotal);
+    t.row(text("Grand Total").bold(), text(upperTotal + lowerTotal).bold());
     t.divider("└", "┴", "┘");
 
     return t.toString();

@@ -1,7 +1,7 @@
-package lab02_number_cubes;
+package scripts;
 import java.util.HashMap;
 
-class Simulate {
+class SimulateDice {
   final static int totalRounds   = 100_000;
   final static int rollsPerRound = 3;
   final static int handSize      = 5;
@@ -48,15 +48,17 @@ class Simulate {
     }
 
     System.out.println(String.format("Simulated %d rounds", totalRounds));
-    System.out.println(
-      String.format("Three of a kinds: %d (%f%%)", threeOfAKinds, (double)threeOfAKinds / totalRounds * 100)
-    );
-    System.out.println(
-      String.format("Four of a kinds: %d (%f%%)", fourOfAKinds, (double)fourOfAKinds / totalRounds * 100)
-    );
-    System.out.println(
-      String.format("Five of a kinds: %d (%f%%)", fiveOfAKinds, (double)fiveOfAKinds / totalRounds * 100)
-    );
+    System.out.println(String.format(
+      "Three of a kinds: %d (%f%%)",
+      threeOfAKinds,
+      (double)threeOfAKinds / totalRounds * 100
+    ));
+    System.out.println(String.format(
+      "Four of a kinds: %d (%f%%)", fourOfAKinds, (double)fourOfAKinds / totalRounds * 100
+    ));
+    System.out.println(String.format(
+      "Five of a kinds: %d (%f%%)", fiveOfAKinds, (double)fiveOfAKinds / totalRounds * 100
+    ));
   }
 
   static int best;
@@ -91,6 +93,8 @@ class Simulate {
   static int roll() { return (int)(Math.random() * 6) + 1; }
 
   static void logCounts() {
-    counts.forEach((k, v) -> { System.out.println(String.format("%d rolled %d times", k, v)); });
+    counts.forEach((k, v) -> {
+      System.out.println(String.format("%d rolled %d times", k, v));
+    });
   }
 }

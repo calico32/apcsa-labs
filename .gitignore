@@ -6,3 +6,5 @@ replit.nix
 .breakpoints
 
 *.iml
+
+.vscode/launch.json

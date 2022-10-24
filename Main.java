@@ -17,7 +17,7 @@ class Main extends TextHelpers {
   // menu
   static {
     programs.put("Temperature converter", TempConverter.class);
-    programs.put("LibreYachts (open Yahtzee™ clone)", LibreYachts.class);
+    programs.put("LibreYachts (open Yahtzee™ inspired game)", LibreYachts.class);
     programs.put("Exit", Exit.class);
   }
 
@@ -31,7 +31,9 @@ class Main extends TextHelpers {
     for (String name : programs.keySet()) {
       choices.add(name);
 
-      TextBuilder.println(text(String.valueOf(choiceNumber++ + 1)).white(), text(". " + name));
+      TextBuilder.println(
+        text(String.valueOf(choiceNumber++ + 1)).white(), text(". " + name)
+      );
     }
 
     System.out.println();
@@ -49,7 +51,9 @@ class Main extends TextHelpers {
     } catch (NoSuchElementException e) {
       // EOF, do nothing
     } catch (NoSuchMethodException e) {
-      TextBuilder.println(text("\nError: Program class does not have a main method.").red());
+      TextBuilder.println(
+        text("\nError: Program class does not have a main method.").red()
+      );
       scanner.close();
       throw e;
     } catch (Exception e) {

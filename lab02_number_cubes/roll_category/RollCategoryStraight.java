@@ -8,7 +8,7 @@ public class RollCategoryStraight extends RollCategory {
   public final int points;
 
   public RollCategoryStraight(String name, int targetLength, int points) {
-    super(name);
+    super(name, String.format("%d pts", points));
     this.targetLength = targetLength;
     this.points       = points;
   }
