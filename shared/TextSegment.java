@@ -37,9 +37,17 @@ public class TextSegment {
     System.out.println();
   }
 
-  TextSegment style(String color) {
+  public TextSegment style(String color) {
     format += color;
     return this;
+  }
+
+  // Formatting
+  public TextSegment padLeft(int width) {
+    return new TextSegment("%" + width + "s", text);
+  }
+  public TextSegment padRight(int width) {
+    return new TextSegment("%-" + width + "s", text);
   }
 
   // Styles
@@ -125,13 +133,9 @@ public class TextSegment {
   public TextSegment bgBlackBright() { return style(BLACK_BACKGROUND_BRIGHT); }
   public TextSegment bgRedBright() { return style(RED_BACKGROUND_BRIGHT); }
   public TextSegment bgGreenBright() { return style(GREEN_BACKGROUND_BRIGHT); }
-  public TextSegment bgYellowBright() {
-    return style(YELLOW_BACKGROUND_BRIGHT);
-  }
+  public TextSegment bgYellowBright() { return style(YELLOW_BACKGROUND_BRIGHT); }
   public TextSegment bgBlueBright() { return style(BLUE_BACKGROUND_BRIGHT); }
-  public TextSegment bgPurpleBright() {
-    return style(PURPLE_BACKGROUND_BRIGHT);
-  }
+  public TextSegment bgPurpleBright() { return style(PURPLE_BACKGROUND_BRIGHT); }
   public TextSegment bgCyanBright() { return style(CYAN_BACKGROUND_BRIGHT); }
   public TextSegment bgWhiteBright() { return style(WHITE_BACKGROUND_BRIGHT); }
 
@@ -156,7 +160,5 @@ public class TextSegment {
 
   public TextSegment rainbow() { return rainbow(0); }
 
-  public TextSegment randomRainbow() {
-    return rainbow((int)(Math.random() * 100));
-  }
+  public TextSegment randomRainbow() { return rainbow((int)(Math.random() * 100)); }
 }

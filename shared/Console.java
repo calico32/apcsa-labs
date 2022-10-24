@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Console {
   public enum KeyCode {
+    ESCAPE(0x1b),
     ARROW_UP(0x1b5b41),
     ARROW_DOWN(0x1b5b42),
     ARROW_RIGHT(0x1b5b43),
     ARROW_LEFT(0x1b5b44),
     ENTER(0xa),
     BACKSPACE(0x7f),
-    ESCAPE(0x1b),
     SPACE(0x20),
     TAB(0x9),
     HOME(0x1b5b48),

@@ -2,9 +2,9 @@ package lab02_number_cubes;
 
 public class LibreYachts {
   public static void main(String[] args) {
-    GameUI ui = new GameUI();
+    Game game = new Game();
     try {
-      ui.main();
+      game.run();
     } catch (Exception e) {
       e.printStackTrace();
     }

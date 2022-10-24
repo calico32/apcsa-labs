@@ -53,7 +53,7 @@ public class Table extends TextHelpers {
         line.append(text(" <").blue());
         selected = false;
       }
-      line.append("\n");
+      line.append("  \n");
       sb.append(line);
     }
   }

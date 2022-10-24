@@ -1,5 +1,6 @@
 package lab02_number_cubes;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -50,14 +51,53 @@ public class Scoresheet extends TextHelpers {
     t = new Table(nameWidth, scoreWidth);
   }
 
-  public void clear() {
+  public void reset() {
     upperSection.clear();
     lowerSection.clear();
+    selectedCategory = null;
+    t.clear();
   }
 
   public void select(RollCategory category) { selectedCategory = category; }
 
-  public String draw() {
+  public boolean isAvailable(RollCategory category) {
+    return !upperSection.containsKey(category) && !lowerSection.containsKey(category);
+  }
+
+  public RollCategory[] getAvailableCategories() {
+    RollCategory[] categories =
+      new RollCategory[UPPER_SECTION.length + LOWER_SECTION.length];
+    int i = 0;
+
+    for (RollCategory category : UPPER_SECTION) {
+      if (isAvailable(category))
+        categories[i++] = category;
+    }
+    for (RollCategory category : LOWER_SECTION) {
+      if (isAvailable(category))
+        categories[i++] = category;
+    }
+
+    return Arrays.copyOf(categories, i);
+  }
+
+  public void setScore(RollCategory category, int score) {
+    for (RollCategory c : UPPER_SECTION) {
+      if (c == category) {
+        upperSection.put(c, score);
+        return;
+      }
+    }
+    for (RollCategory c : LOWER_SECTION) {
+      if (c == category) {
+        lowerSection.put(c, score);
+        return;
+      }
+    }
+  }
+
+  public String draw() { return draw(""); }
+  public String draw(String defaultStyle) {
     t.clear();
 
     t.divider("┌", "─", "┐");
@@ -65,15 +105,23 @@ public class Scoresheet extends TextHelpers {
     t.divider("├", "┬", "┤");
 
     for (RollCategory category : UPPER_SECTION) {
+
       if (selectedCategory == category) {
         t.select().scoreRow(
-          text(category.name).blue().bold(),
-          text(category.scoring).dim(),
+          text(category.getName()).blue().bold(),
+          text(category.scoring).blue().bold(),
           upperSection.getOrDefault(category, -1)
         );
       } else {
+        String name;
+        if (upperSection.containsKey(category)) {
+          name = category.getName(upperSection.get(category));
+        } else {
+          name = category.getName();
+        }
+
         t.scoreRow(
-          text(category.name),
+          text(name).style(defaultStyle),
           text(category.scoring).dim(),
           upperSection.getOrDefault(category, -1)
         );
@@ -96,21 +144,30 @@ public class Scoresheet extends TextHelpers {
 
     t.row(text("Lower Section").bold());
     t.divider("├", "┬", "┤");
+
     for (RollCategory category : LOWER_SECTION) {
       if (selectedCategory == category) {
         t.select().scoreRow(
-          text(category.name).blue().bold(),
-          text(category.scoring).dim(),
+          text(category.getName()).blue().bold(),
+          text(category.scoring).blue().bold(),
           lowerSection.getOrDefault(category, -1)
         );
       } else {
+        String name;
+        if (lowerSection.containsKey(category)) {
+          name = category.getName(lowerSection.get(category));
+        } else {
+          name = category.getName();
+        }
+
         t.scoreRow(
-          text(category.name),
+          text(name).style(defaultStyle),
           text(category.scoring).dim(),
           lowerSection.getOrDefault(category, -1)
         );
       }
     }
+
     t.divider("├", "┼", "┤");
 
     int lowerTotal = 0;

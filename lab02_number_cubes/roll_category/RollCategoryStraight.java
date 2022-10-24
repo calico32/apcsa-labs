@@ -21,7 +21,7 @@ public class RollCategoryStraight extends RollCategory {
 
     int lowValue = 1;
 
-    while (lowValue <= Game.DICE_SIDES - targetLength) {
+    while (lowValue <= Game.DICE_SIDES - targetLength + 1) {
       int length = 0;
       for (int i = 0; i < targetLength; i++) {
         if (counts[lowValue + i - 1] > 0) {
