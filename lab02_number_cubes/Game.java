@@ -25,7 +25,9 @@ public class Game extends TextHelpers {
   enum GameState { START, ROLLING, ROLL_MENU, SELECTING_DICE, SELECTING_CATEGORY }
 
   public static final String logo =
-    "│.│_ .__    _. _│__│_ _\n│││_)|(/_\\/(_│(_| ||__>\n         /";
+    text("│.│_ .__    _. _│__│_ _\n│││_)|(/_\\/(_│(_| ||__>\n         /")
+      .cyan()
+      .toString();
 
   Hand hand;
   Scoresheet scoresheet;
@@ -252,7 +254,6 @@ public class Game extends TextHelpers {
 
   void drawGameOver() {
     println(Util.indent(Game.logo, 10));
-    println();
     println(scoresheet.draw());
     println();
     println("Game over!");
