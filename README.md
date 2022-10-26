@@ -13,6 +13,7 @@ make
 Individual labs:
 
 ```bash
+./configure # only needed once
 make lab01_temp_converter
 make lab02_...
 ```

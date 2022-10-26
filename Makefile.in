@@ -5,10 +5,10 @@ endif
 .PHONY: run build watch
 
 run: build
-	java -cp ../build lab01_temp_converter.TempConverter
+	java -cp ../build:./res @@DIR@@.@@MAIN@@
 
 build:
-	javac -cp .. -d ../build TempConverter.java
+	javac -cp .. -d ../build @@MAIN@@.java
 
 watch:
 	watchexec -e java -- ${MAKE} run

@@ -8,3 +8,5 @@ replit.nix
 *.iml
 
 .vscode/launch.json
+
+lab*/Makefile

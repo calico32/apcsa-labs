@@ -1,0 +1,19 @@
+#!/bin/sh
+
+MAKEFILE_IN=Makefile.in
+
+for labdir in lab**; do
+  if [ -f $labdir/config.in ]; then
+    # read and eval the config.in file
+    . $labdir/config.in
+
+    # if $main isn't set, error out
+    if [ -z "$main" ]; then
+      echo "Error: $labdir/config.in does not set main"
+      exit 1
+    fi
+
+    # copy the Makefile.in to the lab directory with replacements
+    sed -e "s/@@DIR@@/$labdir/g;s/@@MAIN@@/$main/g" $MAKEFILE_IN >$labdir/Makefile
+  fi
+done

@@ -7,11 +7,18 @@ LABS = $(wildcard lab*)
 
 .PHONY: run build clean $(LABS)
 
+define java
+	for lab in $(LABS); do \
+		CLASSPATH=$$CLASSPATH:$$lab/res; \
+	done; \
+	java -cp build$$CLASSPATH
+endef
+
 run: build
 	${MAKE} _run
 
 _run:
-	java -cp build Main
+	$(java) Main
 
 build:
 	javac -d build Main.java
@@ -23,7 +30,7 @@ $(LABS): %:
 	${MAKE} -C $* run
 
 run-test: build-test
-	java -cp build Test
+	$(java) Test
 
 build-test:
 	javac -d build Test.java

@@ -1,5 +1,5 @@
 run = "make"
-hidden = ["build", ".*", "**/Makefile", "LICENSE", "**/*.class"]
+hidden = ["build", ".*", "**/Makefile", "**/config.in", "Makefile.in", "LICENSE", "**/*.class"]
 
 [languages.java]
 pattern = "**/*.java"
