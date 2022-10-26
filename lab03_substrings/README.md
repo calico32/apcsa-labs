@@ -25,5 +25,5 @@ make
 Run from repo root:
 
 ```bash
-make lab02_number_cubes
+make lab03_substrings
 ```
