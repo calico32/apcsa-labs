@@ -8,13 +8,13 @@ import shared.TextHelpers;
 
 public class SubstringGame extends TextHelpers {
   public static final Text[] texts = new Text[] {
-    new Text("Bee Movie script", "bee_movie"),
-    new Text("Digits of Pi", "digits_of_pi"),
-    new Text("FitnessGram Pacer Test", "fitnessgram_pacer_test"),
-    new Text("history of the entire world, i guess", "history_of_the_entire_world"),
-    new Text("Lorem Ipsum", "lorem_ipsum"),
-    new Text("Steamed Hams", "steamed_hams"),
-    new Text("The Lego Movie script", "the_lego_movie"),
+    Text.fromFile("Bee Movie script", "bee_movie"),
+    Text.fromFile("Digits of Pi", "digits_of_pi"),
+    Text.fromFile("FitnessGram Pacer Test", "fitnessgram_pacer_test"),
+    Text.fromFile("history of the entire world, i guess", "history_of_the_entire_world"),
+    Text.fromFile("Lorem Ipsum", "lorem_ipsum"),
+    Text.fromFile("Steamed Hams", "steamed_hams"),
+    Text.fromFile("The Lego Movie script", "the_lego_movie"),
   };
 
   public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class SubstringGame extends TextHelpers {
     TextBuilder.println(
       text("You will be given a text and a substring. "),
       text(
-        "Your goal is to guess the index of the fist occurrence of the substring in the text. "
+        "Your goal is to guess the index of the first occurrence of the substring in the text. "
       ),
       text(
         "Your score out of 5000 is dependent on the distance between your guess and the actual index and the number of hints you use. "
@@ -81,9 +81,7 @@ public class SubstringGame extends TextHelpers {
       Text text;
       if (choice == index) {
         TextBuilder.println(
-          text(
-            "Enter your text, then type [endtext] on a new line (or an EOF) to end your text."
-          )
+          text("Enter your text, then type [endtext] on a new line to end your text.")
             .bold()
         );
         TextBuilder.print(text("> ").blue().bold());
@@ -102,7 +100,7 @@ public class SubstringGame extends TextHelpers {
           builder.append('\n');
         }
 
-        text = new Text("Custom text", builder.toString());
+        text = new Text("Custom text", builder.toString().trim());
       } else if (choice == index - 1) {
         text = texts[(int)(Math.random() * texts.length)];
       } else {

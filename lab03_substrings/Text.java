@@ -8,12 +8,16 @@ public class Text {
   public final String content;
   public final int length;
 
-  public Text(String name, String filename) {
-    this.name = name;
+  public Text(String name, String content) {
+    this.name    = name;
+    this.content = content;
+    this.length  = content.length();
+  }
 
+  public static Text fromFile(String name, String filename) {
     String content = "";
     InputStream input =
-      getClass().getClassLoader().getResourceAsStream(filename + ".txt");
+      Text.class.getClassLoader().getResourceAsStream(filename + ".txt");
     if (input == null) {
       throw new IllegalArgumentException("No such file: " + filename);
     }
@@ -21,11 +25,9 @@ public class Text {
       content = new String(input.readAllBytes());
     } catch (IOException e) {
       e.printStackTrace();
-      this.content = e.toString();
-      this.length  = this.content.length();
-      return;
+      return new Text(e.toString(), e.toString());
     }
-    this.content = content;
-    this.length  = content.length();
+
+    return new Text(name, content);
   }
 }
