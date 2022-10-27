@@ -57,6 +57,8 @@ public class SubstringGame extends TextHelpers {
       if (!input.equals("y") && !input.equals("")) {
         break;
       }
+
+      Console.clear();
     }
 
     scanner.close();
