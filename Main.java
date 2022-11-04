@@ -11,6 +11,7 @@ import shared.TextHelpers;
 import lab01_temp_converter.TempConverter;
 import lab02_number_cubes.LibreYachts;
 import lab03_substrings.SubstringGame;
+import lab04_leap_years.LeapYears;
 
 class Main extends TextHelpers {
   static final HashMap<String, Class<?>> programs = new HashMap<>();
@@ -20,6 +21,7 @@ class Main extends TextHelpers {
     programs.put("Temperature converter", TempConverter.class);
     programs.put("LibreYachts (open Yahtzee™ inspired game)", LibreYachts.class);
     programs.put("Substring guessing game", SubstringGame.class);
+    programs.put("Leap year game", LeapYears.class);
     programs.put("Exit", Exit.class);
   }
 

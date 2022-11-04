@@ -83,11 +83,28 @@ public class Console {
     System.out.flush();
   }
 
+  static boolean shouldSkipNext = false;
+
   public static int[] next() throws IOException {
     List<Integer> bytes = new ArrayList<>();
-    // read at least 1 byte from stdin, and more if available (for special keys that are
-    // more than 1 byte)
-    // blocks until the next key is pressed
+    // wait until the next byte is available
+    while (System.in.available() == 0 && !shouldSkipNext) {
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) {
+        // ignore
+      }
+    }
+
+    if (shouldSkipNext) {
+      shouldSkipNext = false;
+      while (System.in.available() > 0) {
+        System.in.read();
+      }
+      return new int[0];
+    }
+
+    // read all available bytes
     do {
       bytes.add(System.in.read());
     } while (System.in.available() > 0);
@@ -98,6 +115,8 @@ public class Console {
     }
     return result;
   }
+
+  public static void skipNext() { shouldSkipNext = true; }
 
   /**
    *  Execute the stty command with the specified arguments

@@ -4,8 +4,9 @@ ifndef VERBOSE
 endif
 
 LABS = $(wildcard lab*)
+SCRIPTS = $(wildcard scripts/*.java)
 
-.PHONY: run build clean $(LABS)
+.PHONY: run build clean $(LABS) $(SCRIPTS)
 
 define java
 	for lab in $(LABS); do \
@@ -34,3 +35,7 @@ run-test: build-test
 
 build-test:
 	javac -d build Test.java
+
+$(SCRIPTS): %:
+	javac -d build $@
+	java -cp build scripts.$(basename $(notdir $@))
