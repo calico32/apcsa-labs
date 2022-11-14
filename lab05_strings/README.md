@@ -1,10 +1,11 @@
-# Strings
+# String sorter
 
-A thing
+Sorts string lexicographically.
 
 ## Overview
 
-**`Thing`**: main class
+**`StringSorter`**: main class, input handling, output
+**`QuickSort`**: terrible quicksort implementation
 
 ## Running
 
