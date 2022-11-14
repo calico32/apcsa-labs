@@ -5,7 +5,7 @@ endif
 .PHONY: run build watch
 
 run: build
-	java -cp ../build:./res @@DIR@@.@@MAIN@@
+	java -cp ../build:../shared/res:./res @@DIR@@.@@MAIN@@
 
 build:
 	javac -cp .. -d ../build @@MAIN@@.java

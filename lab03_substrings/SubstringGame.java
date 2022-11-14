@@ -3,19 +3,11 @@ package lab03_substrings;
 import java.util.Scanner;
 
 import shared.Console;
+import shared.Text;
 import shared.TextBuilder;
 import shared.TextHelpers;
 
 public class SubstringGame extends TextHelpers {
-  public static final Text[] texts = new Text[] {
-    Text.fromFile("Bee Movie script", "bee_movie"),
-    Text.fromFile("Digits of Pi", "digits_of_pi"),
-    Text.fromFile("FitnessGram Pacer Test", "fitnessgram_pacer_test"),
-    Text.fromFile("history of the entire world, i guess", "history_of_the_entire_world"),
-    Text.fromFile("Lorem Ipsum", "lorem_ipsum"),
-    Text.fromFile("Steamed Hams", "steamed_hams"),
-    Text.fromFile("The Lego Movie script", "the_lego_movie"),
-  };
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -200,9 +192,8 @@ public class SubstringGame extends TextHelpers {
     TextBuilder.println(text("Select a text:").bold());
 
     int index = 0;
-
-    while (index < texts.length) {
-      Text text = texts[index++];
+    while (index < Text.examples.length) {
+      Text text = Text.examples[index++];
       TextBuilder.println(
         text(index + ". ").bold(),
         text(text.name),
@@ -261,9 +252,9 @@ public class SubstringGame extends TextHelpers {
 
       text = new Text("Custom text", builder.toString().trim());
     } else if (choice == index - 1) {
-      text = texts[(int)(Math.random() * texts.length)];
+      text = Text.examples[(int)(Math.random() * Text.examples.length)];
     } else {
-      text = texts[choice - 1];
+      text = Text.examples[choice - 1];
     }
 
     return text;

@@ -12,7 +12,7 @@ define java
 	for lab in $(LABS); do \
 		CLASSPATH=$$CLASSPATH:$$lab/res; \
 	done; \
-	java -cp build$$CLASSPATH
+	java -cp build:shared/res$$CLASSPATH
 endef
 
 run: build
