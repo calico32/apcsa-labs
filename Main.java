@@ -1,9 +1,9 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import shared.TextBuilder;
 import shared.TextHelpers;
@@ -12,17 +12,19 @@ import lab01_temp_converter.TempConverter;
 import lab02_number_cubes.LibreYachts;
 import lab03_substrings.SubstringGame;
 import lab04_leap_years.LeapYears;
+import lab05_strings.StringSorter;
 
 class Main extends TextHelpers {
-  static final HashMap<String, Class<?>> programs = new HashMap<>();
+  static final TreeMap<String, Class<?>> programs = new TreeMap<>();
 
   // menu
   static {
-    programs.put("Temperature converter", TempConverter.class);
-    programs.put("LibreYachts (open Yahtzee™ inspired game)", LibreYachts.class);
-    programs.put("Substring guessing game", SubstringGame.class);
-    programs.put("Leap year game", LeapYears.class);
-    programs.put("Exit", Exit.class);
+    programs.put("1. Temperature converter", TempConverter.class);
+    programs.put("2. LibreYachts (open Yahtzee™ inspired game)", LibreYachts.class);
+    programs.put("3. Substring guessing game", SubstringGame.class);
+    programs.put("4. Leap year game", LeapYears.class);
+    programs.put("5. String sorter", StringSorter.class);
+    programs.put("6. Exit", Exit.class);
   }
 
   public static void main(String[] args) throws NoSuchMethodException {
@@ -30,14 +32,10 @@ class Main extends TextHelpers {
 
     TextBuilder.println(text("Select a program to run:").white().bold());
 
-    int choiceNumber     = 0;
     List<String> choices = new ArrayList<>();
     for (String name : programs.keySet()) {
       choices.add(name);
-
-      TextBuilder.println(
-        text(String.valueOf(choiceNumber++ + 1)).white(), text(". " + name)
-      );
+      System.out.println(name);
     }
 
     System.out.println();
