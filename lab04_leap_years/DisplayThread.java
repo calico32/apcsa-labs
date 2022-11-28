@@ -1,10 +1,11 @@
 package lab04_leap_years;
 
+import static shared.TextHelpers.text;
+
 import java.util.Date;
 
 import shared.Console;
 import shared.TextBuilder;
-import shared.TextSegment;
 
 class DisplayThread extends Thread {
   public final int round;
@@ -44,19 +45,19 @@ class DisplayThread extends Thread {
     Date now    = new Date();
     int elapsed = (int)(now.getTime() - start.getTime());
     TextBuilder.print(
-      new TextSegment("Round " + round + "\n").randomRainbow(),
-      new TextSegment("Time remaining: ").bold(),
-      new TextSegment(Math.round(elapsed / 100.0) * 10 + " seconds\n"),
-      new TextSegment("Is " + year + " a leap year?").bold(),
-      new TextSegment(" (y/n) ").dim()
+      text("Round " + round + "\n").randomRainbow(),
+      text("Time remaining: ").bold(),
+      text(Math.round(elapsed / 100.0) * 10 + " seconds\n"),
+      text("Is " + year + " a leap year?").bold(),
+      text(" (y/n) ").dim()
     );
   }
 
   public void updateTimer() {
     Console.moveCursor(0, 2);
-    TextBuilder.print(new TextSegment("Time remaining: ").bold());
+    TextBuilder.print(text("Time remaining: ").bold());
     TextBuilder.print(
-      new TextSegment(Math.round((time - elapsedTime()) / 100.0) / 10d + " seconds\n")
+      text(Math.round((time - elapsedTime()) / 100.0) / 10d + " seconds\n")
     );
   }
 }

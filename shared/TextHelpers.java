@@ -1,9 +1,14 @@
 package shared;
 
 public class TextHelpers {
-  protected static TextSegment text(Object text) { return new TextSegment(text); }
-  protected static TextSegment text(String format, Object... args) {
+  public static TextSegment text(Object text) { return new TextSegment(text); }
+  public static TextSegment text(String format, Object... args) {
     return new TextSegment(format, args);
   }
-  protected static int printWidth(Object obj) { return Util.printWidth(obj); }
+  public static int printWidth(Object obj) { return Util.printWidth(obj); }
+
+  public static void println(TextSegment... segments) { TextBuilder.println(segments); }
+  public static void println(String str) { System.out.println(str); }
+  public static void println() { System.out.println(); }
+  public static void print(TextSegment... segments) { TextBuilder.print(segments); }
 }

@@ -1,21 +1,22 @@
 package lab03_substrings;
 
+import static shared.TextHelpers.print;
+import static shared.TextHelpers.println;
+import static shared.TextHelpers.text;
+
 import java.util.Scanner;
 
 import shared.Console;
 import shared.Text;
-import shared.TextBuilder;
-import shared.TextHelpers;
 
-public class SubstringGame extends TextHelpers {
-
+public class SubstringGame {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
 
-    TextBuilder.println(text("Substring game").bold().randomRainbow());
+    println(text("Substring game").bold().randomRainbow());
     System.out.println();
-    TextBuilder.println(text("Welcome to the substring game!").bold());
-    TextBuilder.println(
+    println(text("Welcome to the substring game!").bold());
+    println(
       text("You will be given a text and a substring. "),
       text(
         "Your goal is to guess the index of the first occurrence of the substring in the text. "
@@ -34,7 +35,7 @@ public class SubstringGame extends TextHelpers {
 
       System.out.println();
 
-      TextBuilder.println(
+      println(
         text("Play again? [").bold(),
         text("Y").bold().blue(),
         text("/").bold(),
@@ -42,7 +43,7 @@ public class SubstringGame extends TextHelpers {
         text("]").bold()
       );
 
-      TextBuilder.print(text("> ").blue().bold());
+      print(text("> ").blue().bold());
 
       String input = scanner.nextLine().trim();
 
@@ -57,7 +58,7 @@ public class SubstringGame extends TextHelpers {
   }
 
   public static void playGame(Scanner scanner, Text text) {
-    TextBuilder.println(
+    println(
       text("Text: ").bold(),
       text(text.name).bold().randomRainbow(),
 
@@ -82,7 +83,7 @@ public class SubstringGame extends TextHelpers {
 
     final int correctIndex = text.content.indexOf(substring);
 
-    TextBuilder.println(text("...").dim(), text(substring).italic(), text("...").dim());
+    println(text("...").dim(), text(substring).italic(), text("...").dim());
 
     System.out.println();
 
@@ -94,8 +95,8 @@ public class SubstringGame extends TextHelpers {
     boolean answerGiven = false;
 
     while (true) {
-      TextBuilder.print(text("What index is the substring at? ").bold());
-      TextBuilder.println(
+      print(text("What index is the substring at? ").bold());
+      println(
         text("Type ").dim(),
         text("hint").bold().dim(),
         text(" for a hint, or ").dim(),
@@ -103,14 +104,14 @@ public class SubstringGame extends TextHelpers {
         text(" to give up.").dim()
       );
 
-      TextBuilder.println(text("Hints taken: ").dim(), text(hints).bold().dim());
+      println(text("Hints taken: ").dim(), text(hints).bold().dim());
 
-      TextBuilder.print(text("> ").blue().bold());
+      print(text("> ").blue().bold());
 
       String input = scanner.nextLine().trim();
 
       if (input.equals("giveup")) {
-        TextBuilder.println(
+        println(
           text("The substring was at index ").bold(),
           text(correctIndex).bold().randomRainbow()
         );
@@ -121,7 +122,7 @@ public class SubstringGame extends TextHelpers {
         // divide the search space in half
         if (hintLow == hintHigh || Math.abs(hintLow - hintHigh) == 1) {
           answerGiven = true;
-          TextBuilder.println(text("No more hints available.").red());
+          println(text("No more hints available.").red());
           continue;
         }
 
@@ -130,14 +131,14 @@ public class SubstringGame extends TextHelpers {
         if (hintIndex < correctIndex) {
           hintLow = hintIndex + 1;
 
-          TextBuilder.println(
+          println(
             text("The index of the substring is above ").bold(),
             text(hintIndex).bold().blue(),
             text(".").bold()
           );
         } else if (hintIndex == correctIndex) {
           answerGiven = true;
-          TextBuilder.println(
+          println(
             text("The index of the substring is ").bold(),
             text(hintIndex).bold().blue(),
             text(".").bold()
@@ -145,7 +146,7 @@ public class SubstringGame extends TextHelpers {
         } else {
           hintHigh = hintIndex;
 
-          TextBuilder.println(
+          println(
             text("The index of the substring is below ").bold(),
             text(hintIndex).bold().blue(),
             text(".").bold()
@@ -166,7 +167,7 @@ public class SubstringGame extends TextHelpers {
         int score =
           answerGiven ? 0 : getScore(response, correctIndex, text.length, hints);
 
-        TextBuilder.println(
+        println(
           text("Your guess was ").bold(),
           text(Math.abs(response - correctIndex)).bold().randomRainbow(),
           text(" away from the correct index of ").bold(),
@@ -179,7 +180,7 @@ public class SubstringGame extends TextHelpers {
         );
         return;
       } catch (NumberFormatException e) {
-        TextBuilder.println(
+        println(
           text("Invalid input: expected a number between 0 and ").red(),
           text(text.length).red().bold(),
           text(".").red()
@@ -189,12 +190,12 @@ public class SubstringGame extends TextHelpers {
   }
 
   public static Text promptText(Scanner scanner) {
-    TextBuilder.println(text("Select a text:").bold());
+    println(text("Select a text:").bold());
 
     int index = 0;
     while (index < Text.examples.length) {
       Text text = Text.examples[index++];
-      TextBuilder.println(
+      println(
         text(index + ". ").bold(),
         text(text.name),
         text(" (").bold(),
@@ -203,12 +204,12 @@ public class SubstringGame extends TextHelpers {
       );
     }
 
-    TextBuilder.println(text(++index + ". ").bold(), text("Random"));
-    TextBuilder.println(text(++index + ". ").bold(), text("Supply your own text"));
+    println(text(++index + ". ").bold(), text("Random"));
+    println(text(++index + ". ").bold(), text("Supply your own text"));
 
     System.out.println();
 
-    TextBuilder.print(text("> ").blue().bold());
+    print(text("> ").blue().bold());
 
     int choice;
     while (true) {
@@ -221,20 +222,18 @@ public class SubstringGame extends TextHelpers {
 
         break;
       } catch (NumberFormatException e) {
-        TextBuilder.println(
+        println(
           text("Invalid input: expected a number between 1 and " + index + ".").red()
         );
-        TextBuilder.print(text("> ").blue().bold());
+        print(text("> ").blue().bold());
       }
     }
 
     Text text;
     if (choice == index) {
-      TextBuilder.println(
-        text("Enter your text, then type [endtext] on a new line to end your text.")
-          .bold()
-      );
-      TextBuilder.print(text("> ").blue().bold());
+      println(text("Enter your text, then type [endtext] on a new line to end your text.")
+                .bold());
+      print(text("> ").blue().bold());
 
       StringBuilder builder = new StringBuilder();
       while (true) {

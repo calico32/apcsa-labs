@@ -1,25 +1,23 @@
 package lab02_number_cubes;
 
+import static shared.TextHelpers.println;
+import static shared.TextHelpers.text;
+
 import java.io.IOException;
 import java.util.function.Consumer;
 
 import shared.Console;
 import shared.TextBuilder;
-import shared.TextHelpers;
 import shared.TextSegment;
 import shared.Util;
 
 import lab02_number_cubes.roll_category.RollCategory;
 
-public class Game extends TextHelpers {
+public class Game {
   public static final int MAX_ROLLS  = 3;
   public static final int DICE_COUNT = 5;
   public static final int DICE_SIDES = 6;
   public static final int ROLL_DELAY = 400;
-
-  static void println(String text) { System.out.println(text); }
-  static void println(TextSegment... text) { TextBuilder.println(text); }
-  static void println() { System.out.println(); }
 
   enum UIState { TITLE, PLAYING, GAME_OVER }
   enum GameState { START, ROLLING, ROLL_MENU, SELECTING_DICE, SELECTING_CATEGORY }

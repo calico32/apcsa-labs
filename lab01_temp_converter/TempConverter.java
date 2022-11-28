@@ -1,18 +1,21 @@
 package lab01_temp_converter;
 
+import static shared.TextHelpers.print;
+import static shared.TextHelpers.println;
+import static shared.TextHelpers.text;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import shared.TextBuilder;
-import shared.TextHelpers;
 
-public class TempConverter extends TextHelpers {
+public class TempConverter {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
 
-    TextBuilder.println(text("Temperature converter").randomRainbow().bold());
+    println(text("Temperature converter").randomRainbow().bold());
 
-    TextBuilder.println(
+    println(
       text("Type a conversion expression, such as "),
       text("30f to c").bold(),
       text(" or "),
@@ -20,7 +23,7 @@ public class TempConverter extends TextHelpers {
       text(".")
     );
 
-    TextBuilder.println(
+    println(
       text("Type "),
       text("q").bold(),
       text(" or "),
@@ -29,8 +32,8 @@ public class TempConverter extends TextHelpers {
     );
 
     while (true) {
-      System.out.println();
-      TextBuilder.print(text("> ").blue().bold());
+      println();
+      print(text("> ").blue().bold());
 
       String input;
       try {
@@ -55,7 +58,7 @@ public class TempConverter extends TextHelpers {
 
       if (parts.length == 4) {
         if (!parts[2].equalsIgnoreCase("to")) {
-          TextBuilder.println(text("Invalid input: expected \"to\".").red());
+          println(text("Invalid input: expected \"to\".").red());
           continue;
         }
 
@@ -63,7 +66,7 @@ public class TempConverter extends TextHelpers {
         to   = parts[3];
       } else if (parts.length == 3) {
         if (!parts[1].equalsIgnoreCase("to")) {
-          TextBuilder.println(text("Invalid input: expected \"to\".").red());
+          println(text("Invalid input: expected \"to\".").red());
           continue;
         }
         from = parts[0];
@@ -93,7 +96,7 @@ public class TempConverter extends TextHelpers {
 
         double toValue = fromUnit.convert(fromValue, toUnit);
 
-        TextBuilder.println(
+        println(
           text("%.2f", fromValue).blue().bold(),
           text(" "),
           text(fromUnit),
@@ -104,10 +107,10 @@ public class TempConverter extends TextHelpers {
         );
 
       } catch (NumberFormatException e) {
-        TextBuilder.println(text("Invalid number.").red());
+        println(text("Invalid number.").red());
         continue;
       } catch (IllegalArgumentException e) {
-        TextBuilder.println(text(e.getMessage()).red());
+        println(text(e.getMessage()).red());
         continue;
       }
     }

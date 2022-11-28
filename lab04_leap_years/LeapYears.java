@@ -1,8 +1,10 @@
 package lab04_leap_years;
 
+import static shared.TextHelpers.println;
+import static shared.TextHelpers.print;
+import static shared.TextHelpers.text;
+
 import shared.Console;
-import shared.TextBuilder;
-import shared.TextHelpers;
 import shared.TextSegment;
 
 class GameUtil {
@@ -21,20 +23,18 @@ class GameUtil {
   }
 }
 
-public class LeapYears extends TextHelpers {
+public class LeapYears {
 
   public static void main(String[] args) {
     try {
       Console.init();
       Console.hideCursor();
     } catch (Exception e) {
-      TextBuilder.println(
-        text("Error initializing the console window: "), text(e.getMessage())
-      );
+      println(text("Error initializing the console window: "), text(e.getMessage()));
       return;
     }
 
-    TextBuilder.println(
+    println(
       text("Is it a leap year? - The game\n\n").bold().randomRainbow(),
       text(
         "You will be given a year. Answer if it is a leap year before the timer runs out!\n\n"
@@ -61,7 +61,7 @@ public class LeapYears extends TextHelpers {
           int[] input = Console.next();
 
           if (input.length == 0) {
-            TextBuilder.println(text("\n\nYou ran out of time!").bold().red());
+            println(text("\n\nYou ran out of time!").bold().red());
             break roundLoop;
           }
 
@@ -84,16 +84,16 @@ public class LeapYears extends TextHelpers {
           };
 
           if (isCorrect) {
-            TextBuilder.print(text("Correct! ").bold().green());
-            TextBuilder.println(resultString);
-            TextBuilder.println(text("\nPress any key to continue to the next round."));
+            print(text("Correct! ").bold().green());
+            println(resultString);
+            println(text("\nPress any key to continue to the next round."));
             Console.next();
             round++;
             break inputLoop;
           } else {
-            TextBuilder.print(text("Incorrect! ").bold().red());
-            TextBuilder.println(resultString);
-            TextBuilder.println(text("\nPress any key to exit."));
+            print(text("Incorrect! ").bold().red());
+            println(resultString);
+            println(text("\nPress any key to exit."));
             Console.next();
             break roundLoop;
           }
@@ -101,7 +101,7 @@ public class LeapYears extends TextHelpers {
       }
 
     } catch (Exception e) {
-      TextBuilder.println(text("Error getting input: "), text(e.getMessage()));
+      println(text("Error getting input: "), text(e.getMessage()));
     }
   }
 }

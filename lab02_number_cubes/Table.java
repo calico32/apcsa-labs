@@ -1,8 +1,9 @@
 package lab02_number_cubes;
 
-import shared.TextHelpers;
+import static shared.TextHelpers.printWidth;
+import static shared.TextHelpers.text;
 
-public class Table extends TextHelpers {
+public class Table {
   public final int leftWidth;
   public final int rightWidth;
   public final int width;

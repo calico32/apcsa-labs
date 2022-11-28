@@ -1,14 +1,14 @@
 package lab02_number_cubes;
 
+import static shared.TextHelpers.text;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import shared.TextHelpers;
-
 import lab02_number_cubes.roll_category.RollCategory;
 
-public class Scoresheet extends TextHelpers {
+public class Scoresheet {
   static final RollCategory[] UPPER_SECTION = {
     RollCategory.ONES,
     RollCategory.TWOS,
