@@ -11,4 +11,5 @@ public class TextHelpers {
   public static void println(String str) { System.out.println(str); }
   public static void println() { System.out.println(); }
   public static void print(TextSegment... segments) { TextBuilder.print(segments); }
+  public static void print(String str) { System.out.print(str); }
 }

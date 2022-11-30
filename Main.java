@@ -13,6 +13,7 @@ import lab02_number_cubes.LibreYachts;
 import lab03_substrings.SubstringGame;
 import lab04_leap_years.LeapYears;
 import lab05_strings.StringSorter;
+import lab06_loops.HighLowGame;
 
 class Main extends TextHelpers {
   static final TreeMap<String, Class<?>> programs = new TreeMap<>();
@@ -24,7 +25,8 @@ class Main extends TextHelpers {
     programs.put("3. Substring guessing game", SubstringGame.class);
     programs.put("4. Leap year game", LeapYears.class);
     programs.put("5. String sorter", StringSorter.class);
-    programs.put("6. Exit", Exit.class);
+    programs.put("6. High low game", HighLowGame.class);
+    programs.put("7. Exit", Exit.class);
   }
 
   public static void main(String[] args) throws NoSuchMethodException {
