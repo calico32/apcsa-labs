@@ -1,7 +1,6 @@
 package lab02_number_cubes;
 
-import static shared.TextHelpers.println;
-import static shared.TextHelpers.text;
+import static shared.TextHelpers.*;
 
 import java.io.IOException;
 import java.util.function.Consumer;

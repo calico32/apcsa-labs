@@ -1,12 +1,13 @@
 package lab05_strings;
 
+import static shared.TextHelpers.*;
+
 import java.util.Scanner;
 
 import shared.Text;
 import shared.TextBuilder;
-import shared.TextHelpers;
 
-public class StringSorter extends TextHelpers {
+public class StringSorter {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
 

@@ -1,8 +1,6 @@
 package lab04_leap_years;
 
-import static shared.TextHelpers.println;
-import static shared.TextHelpers.print;
-import static shared.TextHelpers.text;
+import static shared.TextHelpers.*;
 
 import shared.Console;
 import shared.TextSegment;

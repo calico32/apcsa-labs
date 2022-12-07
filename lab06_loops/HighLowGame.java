@@ -1,8 +1,6 @@
 package lab06_loops;
 
-import static shared.TextHelpers.print;
-import static shared.TextHelpers.println;
-import static shared.TextHelpers.text;
+import static shared.TextHelpers.*;
 
 import java.util.Scanner;
 

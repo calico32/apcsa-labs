@@ -1,8 +1,6 @@
 package lab01_temp_converter;
 
-import static shared.TextHelpers.print;
-import static shared.TextHelpers.println;
-import static shared.TextHelpers.text;
+import static shared.TextHelpers.*;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

@@ -1,6 +1,6 @@
 package lab04_leap_years;
 
-import static shared.TextHelpers.text;
+import static shared.TextHelpers.*;
 
 import java.util.Date;
 

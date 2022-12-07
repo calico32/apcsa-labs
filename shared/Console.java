@@ -45,6 +45,16 @@ public class Console {
     }
   }
 
+  public static class Size {
+    public final int width;
+    public final int height;
+
+    public Size(int width, int height) {
+      this.width  = width;
+      this.height = height;
+    }
+  }
+
   public static void init() throws IOException, InterruptedException {
     setTerminalToCBreak();
   }
@@ -54,7 +64,7 @@ public class Console {
   private static String ttyConfig;
 
   private static void setTerminalToCBreak() throws IOException, InterruptedException {
-    ttyConfig = stty("-g");
+    ttyConfig = stty("-g").trim();
 
     // set the console to be character-buffered instead of line-buffered
     stty("-icanon");
@@ -118,6 +128,25 @@ public class Console {
 
   public static void skipNext() { shouldSkipNext = true; }
 
+  public static Size getSize() {
+    try {
+      String[] parts = stty("-a").trim().split(";");
+
+      int rows = Integer.parseInt(parts[1].split(" ")[2]);
+      int cols = Integer.parseInt(parts[2].split(" ")[2]);
+
+      return new Size(cols, rows);
+    } catch (Exception e) {
+      return new Size(80, 24);
+    }
+  }
+
+  public static String unquote(String str) {
+    if (str.startsWith("\"") && str.endsWith("\""))
+      return str.substring(1, str.length() - 1);
+    return str;
+  }
+
   /**
    *  Execute the stty command with the specified arguments
    *  against the current active terminal.
@@ -125,14 +154,14 @@ public class Console {
   private static String stty(final String args) throws IOException, InterruptedException {
     String cmd = "stty " + args + " < /dev/tty";
 
-    return exec(new String[] {"sh", "-c", cmd});
+    return exec("sh", "-c", cmd);
   }
 
   /**
    *  Execute the specified command and return the output
    *  (both stdout and stderr).
    */
-  private static String exec(final String[] cmd)
+  private static String exec(final String... cmd)
     throws IOException, InterruptedException {
 
     Process process   = Runtime.getRuntime().exec(cmd);
