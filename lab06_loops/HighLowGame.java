@@ -52,133 +52,156 @@ public class HighLowGame {
 
     println(text("Good luck!"));
 
-    println();
-
-    println(text("Select a difficulty:").white());
-
-    int index = 0;
-    for (Difficulty difficulty : Difficulty.values()) {
-      println(
-        text(index++ + 1).bold().blue(),
-        text(". ").bold(),
-        text(difficulty.displayName()).bold().white(),
-        text(" (").bold(),
-        text(difficulty.min).bold().white(),
-        text(" - ").bold(),
-        text(difficulty.max).bold().white(),
-        text(")").bold()
-      );
-    }
-    println(
-      text(index + 1).bold().blue(), text(". ").bold(), text("Custom").bold().white()
-    );
-
-    long min;
-    long max;
-
-    int difficultyIndex = Input.readInt(1, index + 1) - 1;
-    if (difficultyIndex < Difficulty.values().length) {
-      Difficulty difficulty = Difficulty.values()[difficultyIndex];
-
-      min = difficulty.min;
-      max = difficulty.max;
-    } else {
-      min = Input.readLong(text("Minimum value").white());
-      max = Input.readLong(min, Long.MAX_VALUE, text("Maximum value").white());
-    }
-
-    Console.clear();
-
-    long[] numbers = new long[5];
-    for (int i = 0; i < numbers.length; i++) {
-      numbers[i] = (long)(Math.random() * (max - min + 1)) + min;
-    }
-
-    boolean[] guessed = new boolean[numbers.length];
-
-    long startTime = System.currentTimeMillis();
-    int guesses    = 0;
-
-    Long lastGuess = null;
-
+  gameLoop:
     while (true) {
-      boolean allGuessed = true;
-      for (boolean guess : guessed) {
-        if (!guess) {
-          allGuessed = false;
-          break;
-        }
+      println();
+      println(text("Select a difficulty:").white());
+
+      int index = 0;
+      for (Difficulty difficulty : Difficulty.values()) {
+        println(
+          text(index++ + 1).bold().blue(),
+          text(". ").bold(),
+          text(difficulty.displayName()).bold().white(),
+          text(" (").bold(),
+          text(difficulty.min).bold().white(),
+          text(" - ").bold(),
+          text(difficulty.max).bold().white(),
+          text(")").bold()
+        );
+      }
+      println(
+        text(index + 1).bold().blue(), text(". ").bold(), text("Custom").bold().white()
+      );
+      println();
+
+      long min;
+      long max;
+
+      int difficultyIndex = Input.readInt(1, index + 1) - 1;
+      if (difficultyIndex < Difficulty.values().length) {
+        Difficulty difficulty = Difficulty.values()[difficultyIndex];
+
+        min = difficulty.min;
+        max = difficulty.max;
+      } else {
+        min = Input.readLong(text("Minimum value").white());
+        max = Input.readLong(min, Long.MAX_VALUE, text("Maximum value").white());
       }
 
-      if (allGuessed) {
-        break;
-      }
+      Console.clear();
 
-      printNumbers(numbers, guessed, lastGuess);
-
-      print(text(" "), text(guesses).dim(), text(" > ").yellow());
-
-      String input = scanner.nextLine();
-      long guess;
-
-      try {
-        guess = Long.parseLong(input);
-      } catch (NumberFormatException e) {
-        continue;
-      }
-
-      guesses++;
-
-      boolean newCorrectGuess = false;
+      long[] numbers = new long[5];
       for (int i = 0; i < numbers.length; i++) {
-        if (numbers[i] == guess && !guessed[i]) {
-          guessed[i]      = true;
-          newCorrectGuess = true;
-        }
+        numbers[i] = (long)(Math.random() * (max - min + 1)) + min;
       }
 
-      if (newCorrectGuess) {
-        int correct = 0;
-        for (boolean guessedValue : guessed) {
-          if (guessedValue) {
-            correct++;
+      boolean[] guessed = new boolean[numbers.length];
+
+      long startTime = System.currentTimeMillis();
+      int guesses    = 0;
+
+      Long lastGuess = null;
+
+      println(
+        text("Range: ").bold(),
+        text(min).bold().white(),
+        text(" - ").bold(),
+        text(max).bold().white()
+      );
+      println(text("Start guessing!").bold().white());
+      println(
+        text("Type ").dim(),
+        text("giveup").dim().bold(),
+        text(" to reveal the numbers, or ").dim(),
+        text("quit").dim().bold(),
+        text(" to exit.").dim()
+      );
+      println();
+
+    guessLoop:
+      while (true) {
+        printNumbers(numbers, guessed, lastGuess);
+
+        print(text(" "), text(guesses).dim(), text(" > ").yellow());
+
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("quit")) {
+          break gameLoop;
+        } else if (input.equalsIgnoreCase("giveup")) {
+          println();
+          println(text("The numbers were:").bold().white());
+          for (long number : numbers) {
+            print(text(number).bold().white(), text(" ").bold());
+          }
+
+          println();
+
+          break guessLoop;
+        }
+
+        long guess;
+
+        try {
+          guess = Long.parseLong(input);
+        } catch (NumberFormatException e) {
+          continue;
+        }
+
+        guesses++;
+
+        for (int i = 0; i < numbers.length; i++) {
+          if (numbers[i] == guess && !guessed[i]) {
+            guessed[i] = true;
           }
         }
-        // println(
-        //   text("Guessed ").bold().green(),
-        //   text(guess).bold().white(),
-        //   text(" correctly!").bold().green(),
-        //   text(" (").bold().green(),
-        //   text(correct).bold().white(),
-        //   text("/").bold().green(),
-        //   text(numbers.length).bold().white(),
-        //   text(")").bold().green()
-        // );
+
+        lastGuess = guess;
+
+        boolean allGuessed = true;
+        for (boolean correct : guessed) {
+          if (!correct) {
+            allGuessed = false;
+            break;
+          }
+        }
+
+        if (allGuessed) {
+          printNumbers(numbers, guessed, lastGuess);
+          print(text(" "), text(guesses).dim());
+          println();
+
+          long endTime = System.currentTimeMillis();
+
+          print();
+
+          println(
+            text("You guessed all ").green(),
+            text(numbers.length).bold().white(),
+            text(" numbers in ").green(),
+            text(guesses).bold().white(),
+            text(" guesses!").green()
+          );
+
+          // print time in seconds
+          println(
+            text("It took you ").green(),
+            text((endTime - startTime) / 1000.0).bold().white(),
+            text(" seconds.").green()
+          );
+
+          break guessLoop;
+        }
       }
 
-      lastGuess = guess;
+      println();
+
+      boolean playAgain = Input.readYesNo(true, text("Play again?").white());
+      if (!playAgain) {
+        break gameLoop;
+      }
     }
-
-    printNumbers(numbers, guessed, lastGuess);
-    print(text(" "), text(guesses).dim());
-    println();
-
-    long endTime = System.currentTimeMillis();
-
-    println(
-      text("You guessed all ").bold().green(),
-      text(numbers.length).bold().white(),
-      text(" numbers in ").bold().green(),
-      text(guesses).bold().white(),
-      text(" guesses!").bold().green()
-    );
-
-    // print time in seconds
-    println(
-      text("It took you ").bold().green(),
-      text((endTime - startTime) / 1000.0).bold().white(),
-      text(" seconds!").bold().green()
-    );
 
     scanner.close();
   }

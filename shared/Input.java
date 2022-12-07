@@ -126,4 +126,31 @@ public class Input {
   public static double readDouble() {
     return readDouble(Double.MIN_VALUE, Double.MAX_VALUE);
   }
+
+  public static boolean readYesNo(boolean defaultChoice, TextSegment... prompt) {
+    if (prompt.length != 0) {
+      print(prompt);
+      print(text(" "));
+    }
+
+    if (defaultChoice) {
+      print(text("[Y/n] ").blue());
+    } else {
+      print(text("[y/N] ").blue());
+    }
+
+    while (true) {
+      String input = scanner.nextLine().toLowerCase();
+      if (input.equals("y") || input.equals("yes")) {
+        return true;
+      } else if (input.equals("n") || input.equals("no")) {
+        return false;
+      } else if (input.equals("")) {
+        return defaultChoice;
+      } else {
+        println(text("Invalid input! Enter 'y' or 'n'.").red());
+        print(text("> ").blue());
+      }
+    }
+  }
 }
