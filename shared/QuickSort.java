@@ -1,4 +1,4 @@
-package lab05_strings;
+package shared;
 
 import java.util.ArrayList;
 import java.util.function.BiFunction;
@@ -21,7 +21,7 @@ public class QuickSort<T> {
     };
   };
 
-  QuickSort(Iterable<T> items, BiFunction<T, T, Boolean> compare) {
+  public QuickSort(Iterable<T> items, BiFunction<T, T, Boolean> compare) {
     for (T item : items) {
       this.items.add(item);
     }
@@ -29,7 +29,7 @@ public class QuickSort<T> {
     this.compare = compare;
   }
 
-  QuickSort(T[] items, BiFunction<T, T, Boolean> compare) {
+  public QuickSort(T[] items, BiFunction<T, T, Boolean> compare) {
     for (T item : items) {
       this.items.add(item);
     }
@@ -37,7 +37,7 @@ public class QuickSort<T> {
     this.compare = compare;
   }
 
-  QuickSort(Iterable<T> items) {
+  public QuickSort(Iterable<T> items) {
     for (T item : items) {
       this.items.add(item);
     }
@@ -45,7 +45,7 @@ public class QuickSort<T> {
     this.compare = strings();
   }
 
-  QuickSort(T[] items) {
+  public QuickSort(T[] items) {
     for (T item : items) {
       this.items.add(item);
     }
@@ -61,6 +61,8 @@ public class QuickSort<T> {
     items.set(i, items.get(j));
     items.set(j, temp);
   }
+
+  public Iterable<T> getItems() { return items; }
 
   /**
    * Sorts the list.

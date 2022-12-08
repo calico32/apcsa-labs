@@ -4,6 +4,7 @@ import static shared.TextHelpers.*;
 
 import java.util.Scanner;
 
+import shared.QuickSort;
 import shared.Text;
 import shared.TextBuilder;
 
@@ -84,10 +85,9 @@ public class StringSorter {
       String[] words = text.split("\s+");
 
       QuickSort<String> wordSort = new QuickSort<>(words);
-      wordSort.sort();
 
       TextBuilder.print(text("Word sort:   ").bold());
-      for (String word : wordSort.items) {
+      for (String word : wordSort.sort()) {
         System.out.print(word);
         System.out.print(" ");
       }
@@ -98,10 +98,9 @@ public class StringSorter {
         letters[i] = text.charAt(i);
       }
       QuickSort<Character> letterSort = new QuickSort<>(letters);
-      letterSort.sort();
 
       TextBuilder.print(text("Letter sort: ").bold());
-      for (Character letter : letterSort.items) {
+      for (Character letter : letterSort.sort()) {
         System.out.print(letter);
       }
 
