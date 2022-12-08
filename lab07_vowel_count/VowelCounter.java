@@ -56,7 +56,7 @@ public class VowelCounter {
     HashMap<Character, Integer> counts = new HashMap<>();
 
     for (char c : text.content.toCharArray()) {
-      if (Character.isLetter(c)) {
+      if (Character.isLetter(c) || Character.isDigit(c)) {
         c = Character.toLowerCase(c);
         if (counts.containsKey(c)) {
           counts.put(c, counts.get(c) + 1);
@@ -76,7 +76,7 @@ public class VowelCounter {
     for (char c : counts.keySet()) {
       h.addCategory(String.valueOf(c), counts.get(c));
     }
-    h.print();
+    h.display();
     h.clear();
 
     println();
@@ -87,18 +87,19 @@ public class VowelCounter {
       .stream()
       .sorted((a, b) -> b.getValue() - a.getValue())
       .forEach(e -> h.addCategory(String.valueOf(e.getKey()), e.getValue()));
-    h.print();
+    h.display();
     h.clear();
 
     println();
     println();
 
     h.setTitle("Vowel counts: " + text.name);
-    h.addCategory("a", counts.getOrDefault('a', 0));
-    h.addCategory("e", counts.getOrDefault('e', 0));
-    h.addCategory("i", counts.getOrDefault('i', 0));
-    h.addCategory("o", counts.getOrDefault('o', 0));
-    h.addCategory("u", counts.getOrDefault('u', 0));
-    h.print();
+    char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+    for (char c : vowels) {
+      if (counts.containsKey(c)) {
+        h.addCategory(String.valueOf(c), counts.get(c));
+      }
+    }
+    h.display();
   }
 }
