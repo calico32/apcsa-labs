@@ -23,8 +23,8 @@ public class Histogram {
   final String verticalBars   = "▁▂▃▄▅▆▇█";
   final String horizontalBars = "▏▎▍▌▋▊▉█";
 
-  public final String title;
   public final ArrayList<Category> categories;
+  public String title;
   public Orientation orientation       = Orientation.HORIZONTAL;
   public ValueMode valueMode           = ValueMode.ABSOLUTE;
   public ValuePlacement valuePlacement = ValuePlacement.OUTSIDE;
@@ -34,6 +34,10 @@ public class Histogram {
     this.categories = new ArrayList<>();
   }
 
+  public Histogram setTitle(String title) {
+    this.title = title;
+    return this;
+  }
   public Histogram setOrientation(Orientation orientation) {
     this.orientation = orientation;
     return this;
