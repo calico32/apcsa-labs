@@ -1,20 +1,23 @@
 package shared;
 
-import static shared.TextHelpers.print;
-import static shared.TextHelpers.println;
-import static shared.TextHelpers.text;
+import static shared.TextHelpers.*;
 
 import java.util.Scanner;
 
 public class Input {
   public static final Scanner scanner = new Scanner(System.in);
 
-  private static void prompt(TextSegment... segments) {
+  public static void prompt(TextSegment... segments) {
     if (segments.length != 0) {
       print(segments);
       print(text(" "));
     }
     print(text("> ").blue());
+  }
+
+  public static String readString(TextSegment... prompt) {
+    prompt(prompt);
+    return scanner.nextLine();
   }
 
   public static long readLong(long min, long max, TextSegment... prompt) {
