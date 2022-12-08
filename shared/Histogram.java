@@ -15,7 +15,7 @@ public class Histogram {
     public final double value;
 
     public Category(String name, Number value) {
-      this.name  = name;
+      this.name  = name.replaceAll("\\n", "\\n");
       this.value = value.doubleValue();
     }
   }
@@ -120,8 +120,12 @@ public class Histogram {
         int lastBarIndex  = eighths % 8;
         char lastBar;
         if (lastBarIndex == 0) {
-          fullBars--;
-          lastBar = fullBlock;
+          if (fullBars == 0) {
+            lastBar = horizontalBars.charAt(1);
+          } else {
+            fullBars--;
+            lastBar = fullBlock;
+          }
         } else {
           lastBar = horizontalBars.charAt(lastBarIndex);
         }

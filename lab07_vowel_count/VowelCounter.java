@@ -14,23 +14,35 @@ public class VowelCounter {
   public static void main(String[] args) {
     println(text("Character counter").bold().randomRainbow());
 
-    Text text;
+    println(text("\nExamples:").bold());
+    while (true) {
+      println();
 
-    println(text("Examples:").bold());
-    for (int i = 0; i < Text.examples.length; i++) {
-      println(text("%d. ", i + 1).bold().white(), text(Text.examples[i].name));
+      for (int i = 0; i < Text.examples.length; i++) {
+        println(text("%d. ", i + 1).bold().white(), text(Text.examples[i].name));
+      }
+
+      println(
+        text(
+          "\nSelect an example text by entering its number, or begin typing your own text. Type "
+        ),
+        text("[endtext]").bold(),
+        text(" on a new line to finish.\n"),
+        text("Type ").dim(),
+        text("quit").dim().bold(),
+        text(" to exit.").dim()
+      );
+
+      printHistograms(promptText());
     }
+  }
 
-    println(
-      text(
-        "Select an example text by entering its number, or begin typing your own text. Type "
-      ),
-      text("[endtext]").bold(),
-      text(" on a new line to finish.")
-
-    );
-
+  private static Text promptText() {
+    Text text;
     String input = Input.readString();
+    if (input.equals("quit")) {
+      System.exit(0);
+    }
     try {
       int index = Integer.parseInt(input) - 1;
       if (index < 0 || index >= Text.examples.length) {
@@ -50,21 +62,29 @@ public class VowelCounter {
 
       text = new Text("Custom text", input.trim());
     }
+    return text;
+  }
 
-    println();
-
+  static HashMap<Character, Integer> countCharacters(Text text) {
     HashMap<Character, Integer> counts = new HashMap<>();
-
     for (char c : text.content.toCharArray()) {
-      if (Character.isLetter(c) || Character.isDigit(c)) {
-        c = Character.toLowerCase(c);
-        if (counts.containsKey(c)) {
-          counts.put(c, counts.get(c) + 1);
-        } else {
-          counts.put(c, 1);
-        }
+      if (!Character.isLetter(c) && !Character.isDigit(c)) {
+        continue;
+      }
+
+      char key = Character.toLowerCase(c);
+
+      if (counts.containsKey(key)) {
+        counts.put(key, counts.get(key) + 1);
+      } else {
+        counts.put(key, 1);
       }
     }
+    return counts;
+  }
+
+  private static void printHistograms(Text text) {
+    HashMap<Character, Integer> counts = countCharacters(text);
 
     println();
     println();
@@ -73,9 +93,10 @@ public class VowelCounter {
     h.setValuePlacement(ValuePlacement.INSIDE);
     h.setValueMode(ValueMode.BOTH);
 
-    for (char c : counts.keySet()) {
-      h.addCategory(String.valueOf(c), counts.get(c));
-    }
+    counts.entrySet()
+      .stream()
+      .sorted((a, b) -> a.getKey() - b.getKey())
+      .forEach(e -> h.addCategory(String.valueOf(e.getKey()), e.getValue()));
     h.display();
     h.clear();
 
@@ -101,5 +122,6 @@ public class VowelCounter {
       }
     }
     h.display();
+    h.clear();
   }
 }
