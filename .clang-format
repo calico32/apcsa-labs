@@ -5,6 +5,7 @@ BinPackArguments: false
 ContinuationIndentWidth: 2
 AlignConsecutiveAssignments: true
 AllowShortCaseLabelsOnASingleLine: true
+AlignOperands: DontAlign
 IndentCaseLabels: true
 ColumnLimit: 90
 JavaImportGroups:
