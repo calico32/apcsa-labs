@@ -82,22 +82,23 @@ public class VowelCounter {
     println();
     println();
 
-    h.setValuePlacement(ValuePlacement.INSIDE);
-    h.addCategory("a", counts.getOrDefault('a', 0));
-    h.addCategory("e", counts.getOrDefault('e', 0));
-    h.addCategory("i", counts.getOrDefault('i', 0));
-    h.addCategory("o", counts.getOrDefault('o', 0));
-    h.addCategory("u", counts.getOrDefault('u', 0));
+    h.setTitle("Sorted character counts: " + text.name);
+    counts.entrySet()
+      .stream()
+      .sorted((a, b) -> b.getValue() - a.getValue())
+      .forEach(e -> h.addCategory(String.valueOf(e.getKey()), e.getValue()));
     h.print();
     h.clear();
 
     println();
     println();
 
-    counts.entrySet()
-      .stream()
-      .sorted((a, b) -> b.getValue() - a.getValue())
-      .forEach(e -> h.addCategory(String.valueOf(e.getKey()), e.getValue()));
+    h.setTitle("Vowel counts: " + text.name);
+    h.addCategory("a", counts.getOrDefault('a', 0));
+    h.addCategory("e", counts.getOrDefault('e', 0));
+    h.addCategory("i", counts.getOrDefault('i', 0));
+    h.addCategory("o", counts.getOrDefault('o', 0));
+    h.addCategory("u", counts.getOrDefault('u', 0));
     h.print();
   }
 }
