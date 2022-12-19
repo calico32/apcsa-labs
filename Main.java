@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 import shared.TextBuilder;
 import shared.TextHelpers;
@@ -18,20 +17,32 @@ import lab08_random_walk.RandomWalk;
 import lab09_integer_sequence.IntegerSequence;
 
 class Main extends TextHelpers {
-  static final TreeMap<String, Class<?>> programs = new TreeMap<>();
+  static class Program {
+    public final String name;
+    public final Class<?> cls;
+
+    public Program(String name, Class<?> cls) {
+      this.name = name;
+      this.cls  = cls;
+    }
+  }
+
+  static final ArrayList<Program> programs = new ArrayList<>();
+
+  static void program(String name, Class<?> cls) { programs.add(new Program(name, cls)); }
 
   // menu
   static {
-    programs.put("1. Temperature converter", TempConverter.class);
-    programs.put("2. LibreYachts (open Yahtzee™ inspired game)", LibreYachts.class);
-    programs.put("3. Substring guessing game", SubstringGame.class);
-    programs.put("4. Leap year game", LeapYears.class);
-    programs.put("5. String sorter", StringSorter.class);
-    programs.put("6. High low game", HighLowGame.class);
-    programs.put("7. Character/vowel counter", VowelCounter.class);
-    programs.put("8. Random walk simulator", RandomWalk.class);
-    programs.put("9. Integer sequence", IntegerSequence.class);
-    programs.put("10. Exit", Exit.class);
+    program("Temperature converter", TempConverter.class);
+    program("LibreYachts (open Yahtzee™ inspired game)", LibreYachts.class);
+    program("Substring guessing game", SubstringGame.class);
+    program("Leap year game", LeapYears.class);
+    program("String sorter", StringSorter.class);
+    program("High low game", HighLowGame.class);
+    program("Character/vowel counter", VowelCounter.class);
+    program("Random walk simulator", RandomWalk.class);
+    program("Integer sequence", IntegerSequence.class);
+    program("Exit", Exit.class);
   }
 
   public static void main(String[] args) throws NoSuchMethodException {
@@ -40,9 +51,10 @@ class Main extends TextHelpers {
     TextBuilder.println(text("Select a program to run:").white().bold());
 
     var choices = new ArrayList<String>();
-    for (String name : programs.keySet()) {
-      choices.add(name);
-      System.out.println(name);
+    for (var i = 0; i < programs.size(); i++) {
+      var program = programs.get(i);
+      choices.add(program.name);
+      TextBuilder.println(text((i + 1) + ". " + program.name));
     }
 
     System.out.println();
@@ -50,7 +62,7 @@ class Main extends TextHelpers {
 
     try {
       var choice       = scanner.nextInt();
-      var programClass = programs.get(choices.get(choice - 1));
+      var programClass = programs.get(choice - 1).cls;
       TextBuilder.print(text("\n---------------\n\n").dim());
       programClass.getMethod("main", String[].class).invoke(null, (Object)args);
     } catch (IndexOutOfBoundsException e) {
