@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -15,6 +14,8 @@ import lab04_leap_years.LeapYears;
 import lab05_strings.StringSorter;
 import lab06_loops.HighLowGame;
 import lab07_vowel_count.VowelCounter;
+import lab08_random_walk.RandomWalk;
+import lab09_integer_sequence.IntegerSequence;
 
 class Main extends TextHelpers {
   static final TreeMap<String, Class<?>> programs = new TreeMap<>();
@@ -28,15 +29,17 @@ class Main extends TextHelpers {
     programs.put("5. String sorter", StringSorter.class);
     programs.put("6. High low game", HighLowGame.class);
     programs.put("7. Character/vowel counter", VowelCounter.class);
-    programs.put("8. Exit", Exit.class);
+    programs.put("8. Random walk simulator", RandomWalk.class);
+    programs.put("9. Integer sequence", IntegerSequence.class);
+    programs.put("10. Exit", Exit.class);
   }
 
   public static void main(String[] args) throws NoSuchMethodException {
-    Scanner scanner = new Scanner(System.in);
+    var scanner = new Scanner(System.in);
 
     TextBuilder.println(text("Select a program to run:").white().bold());
 
-    List<String> choices = new ArrayList<>();
+    var choices = new ArrayList<String>();
     for (String name : programs.keySet()) {
       choices.add(name);
       System.out.println(name);
@@ -46,8 +49,8 @@ class Main extends TextHelpers {
     System.out.print("> ");
 
     try {
-      int choice            = scanner.nextInt();
-      Class<?> programClass = programs.get(choices.get(choice - 1));
+      var choice       = scanner.nextInt();
+      var programClass = programs.get(choices.get(choice - 1));
       TextBuilder.print(text("\n---------------\n\n").dim());
       programClass.getMethod("main", String[].class).invoke(null, (Object)args);
     } catch (IndexOutOfBoundsException e) {
