@@ -1,10 +1,9 @@
+import static shared.TextHelpers.*;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
-import shared.TextBuilder;
-import shared.TextHelpers;
 
 import lab01_temp_converter.TempConverter;
 import lab02_number_cubes.LibreYachts;
@@ -16,7 +15,7 @@ import lab07_vowel_count.VowelCounter;
 import lab08_random_walk.RandomWalk;
 import lab09_integer_sequence.IntegerSequence;
 
-class Main extends TextHelpers {
+class Main {
   static class Program {
     public final String name;
     public final Class<?> cls;
@@ -48,13 +47,13 @@ class Main extends TextHelpers {
   public static void main(String[] args) throws NoSuchMethodException {
     var scanner = new Scanner(System.in);
 
-    TextBuilder.println(text("Select a program to run:").white().bold());
+    println(text("Select a program to run:").white().bold());
 
     var choices = new ArrayList<String>();
     for (var i = 0; i < programs.size(); i++) {
       var program = programs.get(i);
       choices.add(program.name);
-      TextBuilder.println(text((i + 1) + ". " + program.name));
+      println(text((i + 1) + ". " + program.name));
     }
 
     System.out.println();
@@ -63,22 +62,20 @@ class Main extends TextHelpers {
     try {
       var choice       = scanner.nextInt();
       var programClass = programs.get(choice - 1).cls;
-      TextBuilder.print(text("\n---------------\n\n").dim());
+      print(text("\n---------------\n\n").dim());
       programClass.getMethod("main", String[].class).invoke(null, (Object)args);
     } catch (IndexOutOfBoundsException e) {
-      TextBuilder.println(text("\nInvalid choice.").red());
+      println(text("\nInvalid choice.").red());
     } catch (InputMismatchException e) {
-      TextBuilder.println(text("\nInvalid choice.").red());
+      println(text("\nInvalid choice.").red());
     } catch (NoSuchElementException e) {
       // EOF, do nothing
     } catch (NoSuchMethodException e) {
-      TextBuilder.println(
-        text("\nError: Program class does not have a main method.").red()
-      );
+      println(text("\nError: Program class does not have a main method.").red());
       scanner.close();
       throw e;
     } catch (Exception e) {
-      TextBuilder.println(text("\nError: " + e).red());
+      println(text("\nError: " + e).red());
     }
 
     scanner.close();
