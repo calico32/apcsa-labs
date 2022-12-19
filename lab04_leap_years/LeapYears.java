@@ -11,8 +11,8 @@ class GameUtil {
   }
 
   static int randomYear(int round) {
-    int maxYear = (int)(0.5 * Math.pow(round, 3) + 1582 + 500);
-    int minYear = 1582;
+    var maxYear = (int)(0.5 * Math.pow(round, 3) + 1582 + 500);
+    var minYear = 1582;
     return (int)(Math.random() * (maxYear - minYear) + minYear);
   }
 
@@ -40,7 +40,7 @@ public class LeapYears {
       text("Press any key to begin.")
     );
 
-    int round = 1;
+    var round = 1;
 
     DisplayThread display = null;
 
@@ -56,23 +56,23 @@ public class LeapYears {
 
       inputLoop:
         while (true) {
-          int[] input = Console.next();
+          var input = Console.next();
 
           if (input.length == 0) {
             println(text("\n\nYou ran out of time!").bold().red());
             break roundLoop;
           }
 
-          int key = input[0];
+          var key = input[0];
           if (key != 'n' && key != 'y') {
             continue inputLoop;
           }
 
           display.interrupt();
-          boolean isLeapYear = GameUtil.isLeapYear(display.year);
-          boolean isCorrect  = (key == 'y') == isLeapYear;
+          var isLeapYear = GameUtil.isLeapYear(display.year);
+          var isCorrect  = (key == 'y') == isLeapYear;
 
-          TextSegment[] resultString = new TextSegment[] {
+          var resultString = new TextSegment[] {
             text("The year "),
             text(display.year).bold().randomRainbow(),
             text(isLeapYear ? " is " : " is not ")

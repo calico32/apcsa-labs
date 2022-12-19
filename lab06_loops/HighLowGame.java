@@ -29,7 +29,7 @@ enum Difficulty {
 
 public class HighLowGame {
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
+    var scanner = new Scanner(System.in);
 
     println(text("High low game").bold().randomRainbow());
 
@@ -55,7 +55,7 @@ public class HighLowGame {
       println();
       println(text("Select a difficulty:").white());
 
-      int index = 0;
+      var index = 0;
       for (Difficulty difficulty : Difficulty.values()) {
         println(
           text(index++ + 1).bold().blue(),
@@ -73,12 +73,11 @@ public class HighLowGame {
       );
       println();
 
-      long min;
-      long max;
+      long min, max;
 
-      int difficultyIndex = Input.readInt(1, index + 1) - 1;
+      var difficultyIndex = Input.readInt(1, index + 1) - 1;
       if (difficultyIndex < Difficulty.values().length) {
-        Difficulty difficulty = Difficulty.values()[difficultyIndex];
+        var difficulty = Difficulty.values()[difficultyIndex];
 
         min = difficulty.min;
         max = difficulty.max;
@@ -89,16 +88,14 @@ public class HighLowGame {
 
       Console.clear();
 
-      long[] numbers = new long[5];
+      var numbers = new long[5];
       for (int i = 0; i < numbers.length; i++) {
         numbers[i] = (long)(Math.random() * (max - min + 1)) + min;
       }
 
-      boolean[] guessed = new boolean[numbers.length];
-
-      long startTime = System.currentTimeMillis();
-      int guesses    = 0;
-
+      var guessed    = new boolean[numbers.length];
+      var startTime  = System.currentTimeMillis();
+      var guesses    = 0;
       Long lastGuess = null;
 
       println(
@@ -123,7 +120,7 @@ public class HighLowGame {
 
         print(text(" "), text(guesses).dim(), text(" > ").yellow());
 
-        String input = scanner.nextLine();
+        var input = scanner.nextLine();
 
         if (input.equalsIgnoreCase("quit")) {
           break gameLoop;
@@ -157,7 +154,7 @@ public class HighLowGame {
 
         lastGuess = guess;
 
-        boolean allGuessed = true;
+        var allGuessed = true;
         for (boolean correct : guessed) {
           if (!correct) {
             allGuessed = false;
@@ -170,7 +167,7 @@ public class HighLowGame {
           print(text(" "), text(guesses).dim());
           println();
 
-          long endTime = System.currentTimeMillis();
+          var endTime = System.currentTimeMillis();
 
           print();
 
@@ -195,7 +192,7 @@ public class HighLowGame {
 
       println();
 
-      boolean playAgain = Input.readYesNo(true, text("Play again?").white());
+      var playAgain = Input.readYesNo(true, text("Play again?").white());
       if (!playAgain) {
         break gameLoop;
       }
@@ -207,7 +204,7 @@ public class HighLowGame {
   public static void printNumbers(long[] numbers, boolean[] guessed, Long guess) {
 
     for (int i = 0; i < numbers.length; i++) {
-      long n = numbers[i];
+      var n = numbers[i];
       TextSegment segment;
       if (guess == null) {
         segment = text(" · ").black().bgWhite();

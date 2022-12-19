@@ -48,17 +48,15 @@ enum TempUnit {
         }
     }
 
-    throw new IllegalArgumentException(
-      "Cannot convert from " + this + " to " + to
-    );
+    throw new IllegalArgumentException("Cannot convert from " + this + " to " + to);
   }
 
   static TempUnit fromString(String s) {
-    for (TempUnit unit : TempUnit.values()) {
+    for (var unit : TempUnit.values()) {
       if (unit.name.equalsIgnoreCase(s) || unit.symbol.equalsIgnoreCase(s)) {
         return unit;
       }
-      for (String alias : unit.aliases) {
+      for (var alias : unit.aliases) {
         if (alias.equalsIgnoreCase(s)) {
           return unit;
         }

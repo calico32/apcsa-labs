@@ -10,13 +10,13 @@ import shared.TextBuilder;
 
 public class StringSorter {
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
+    var scanner = new Scanner(System.in);
 
     TextBuilder.println(text("String sorter").randomRainbow());
 
-    int index = 0;
+    var index = 0;
     while (index < Text.examples.length) {
-      Text text = Text.examples[index++];
+      var text = Text.examples[index++];
       TextBuilder.println(text(index + ". ").bold(), text(text.name));
     }
 
@@ -26,14 +26,13 @@ public class StringSorter {
 
   outer:
     while (true) {
-
       System.out.println();
 
       TextBuilder.print(text("> ").blue().bold());
 
       String text;
       while (true) {
-        String input = scanner.nextLine().trim();
+        var input = scanner.nextLine().trim();
         if (input.isBlank()) {
           TextBuilder.print(text("> ").blue().bold());
           continue;
@@ -43,7 +42,7 @@ public class StringSorter {
         }
 
         try {
-          int choice = Integer.parseInt(input);
+          var choice = Integer.parseInt(input);
 
           if (choice < 1 || choice > index) {
             TextBuilder.println(
@@ -55,17 +54,17 @@ public class StringSorter {
             continue;
           }
 
-          Text preset = Text.examples[choice - 1];
+          var preset = Text.examples[choice - 1];
 
           // calculate substring length, which scales with text length and is capped at
           // 100
-          int substringLength = Math.min(100, (int)(preset.length * 0.1));
+          var substringLength = Math.min(100, (int)(preset.length * 0.1));
 
-          int substringIndex = (int)(Math.random() * (preset.length - substringLength));
+          var substringIndex = (int)(Math.random() * (preset.length - substringLength));
 
           // if the substring has spaces nearby, advance the substring index to the next
           // space
-          final int nextSpace = preset.content.indexOf(' ', substringIndex);
+          final var nextSpace = preset.content.indexOf(' ', substringIndex);
           if (nextSpace != -1 && nextSpace < substringIndex + substringLength && nextSpace + substringLength < preset.length) {
             substringIndex = nextSpace + 1;
           }
@@ -82,24 +81,24 @@ public class StringSorter {
         }
       }
 
-      String[] words = text.split("\s+");
+      var words = text.split("\s+");
 
-      QuickSort<String> wordSort = new QuickSort<>(words);
+      var wordSort = new QuickSort<>(words);
 
-      TextBuilder.print(text("Word sort:   ").bold());
+      print(text("Word sort:   ").bold());
       for (String word : wordSort.sort()) {
-        System.out.print(word);
-        System.out.print(" ");
+        print(word);
+        print(" ");
       }
-      System.out.println();
+      println();
 
-      Character[] letters = new Character[text.length()];
+      var letters = new Character[text.length()];
       for (int i = 0; i < text.length(); i++) {
         letters[i] = text.charAt(i);
       }
-      QuickSort<Character> letterSort = new QuickSort<>(letters);
+      var letterSort = new QuickSort<>(letters);
 
-      TextBuilder.print(text("Letter sort: ").bold());
+      print(text("Letter sort: ").bold());
       for (Character letter : letterSort.sort()) {
         System.out.print(letter);
       }

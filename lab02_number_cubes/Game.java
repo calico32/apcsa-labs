@@ -6,11 +6,8 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 import shared.Console;
-import shared.TextBuilder;
 import shared.TextSegment;
 import shared.Util;
-
-import lab02_number_cubes.roll_category.RollCategory;
 
 public class Game {
   public static final int MAX_ROLLS  = 3;
@@ -113,7 +110,7 @@ public class Game {
     try {
       draw();
       while (true) {
-        int[] input = Console.next();
+        var input = Console.next();
 
         handleInput(input);
         if (shouldExit) {
@@ -146,11 +143,11 @@ public class Game {
     println("Welcome to LibreYachts!");
     println();
     for (TitleMenuOptions option : TitleMenuOptions.values()) {
-      TextSegment t = text(option.text);
+      var t = text(option.text);
       if (selected == option.ordinal()) {
-        TextBuilder.println(text("> ").blue(), t.blue());
+        println(text("> ").blue(), t.blue());
       } else {
-        TextBuilder.println(text("  "), t);
+        println(text("  "), t);
       }
     }
   }
@@ -181,23 +178,23 @@ public class Game {
     println(hand.draw());
     println();
     println("Select an option:");
-    for (RollMenuOptions option : RollMenuOptions.values()) {
-      TextSegment t = text(option.text);
+    for (var option : RollMenuOptions.values()) {
+      var t = text(option.text);
       if (option == RollMenuOptions.ROLL) {
         t.text += " (rolls left: " + rollsLeft + ")";
         if (rollsLeft == 0) {
           t.dim();
           if (selected == option.ordinal()) {
-            TextBuilder.println(text("> ").dim(), t.dim());
+            println(text("> ").dim(), t.dim());
             continue;
           }
         }
       }
 
       if (selected == option.ordinal()) {
-        TextBuilder.println(text("> ").blue(), t.blue());
+        println(text("> ").blue(), t.blue());
       } else {
-        TextBuilder.println(text("  "), t);
+        println(text("  "), t);
       }
     }
   }
@@ -235,11 +232,11 @@ public class Game {
 
     println();
 
-    RollCategory cat = scoresheet.selectedCategory;
+    var cat = scoresheet.selectedCategory;
 
     if (cat != null) {
       println(text("Selected: ").bold(), text(cat.name).padRight(30).bold().blue());
-      int points = cat.isMatch(hand.dice) ? cat.getScore(hand.dice) : 0;
+      var points = cat.isMatch(hand.dice) ? cat.getScore(hand.dice) : 0;
       println(
         text("Scoring here would give you ").bold(),
         text(points).bold().blue(),
@@ -291,7 +288,7 @@ public class Game {
   }
 
   boolean handleStartInput(int[] input) {
-    Console.KeyCode key = Console.KeyCode.fromBytes(input);
+    var key = Console.KeyCode.fromBytes(input);
     if (key != null) {
       switch (key) {
         case ENTER:
@@ -312,7 +309,7 @@ public class Game {
   }
 
   void handleRollMenuInput(int[] input) {
-    Console.KeyCode key = Console.KeyCode.fromBytes(input);
+    var key = Console.KeyCode.fromBytes(input);
 
     if (key != null && key == Console.KeyCode.ENTER && selected == RollMenuOptions.ROLL.ordinal() && rollsLeft == 0) {
       return;
@@ -322,7 +319,7 @@ public class Game {
   }
 
   void handleSelectingDiceInput(int[] input) {
-    Console.KeyCode key = Console.KeyCode.fromBytes(input);
+    var key = Console.KeyCode.fromBytes(input);
     if (key != null) {
       switch (key) {
         case ARROW_LEFT: selected = Math.max(selected - 1, 0); break;
@@ -349,9 +346,9 @@ public class Game {
   }
 
   void handleSelectingCategoryInput(int[] input) {
-    Console.KeyCode key = Console.KeyCode.fromBytes(input);
+    var key = Console.KeyCode.fromBytes(input);
 
-    RollCategory[] categories = scoresheet.getAvailableCategories();
+    var categories = scoresheet.getAvailableCategories();
 
     if (key != null) {
       switch (key) {
@@ -364,7 +361,7 @@ public class Game {
           scoresheet.select(categories[selected]);
           break;
         case ENTER:
-          RollCategory category = categories[selected];
+          var category = categories[selected];
           if (category.isMatch(hand.dice)) {
             scoresheet.setScore(category, category.getScore(hand.dice));
           } else {
@@ -383,7 +380,7 @@ public class Game {
   }
 
   void handleGameOverInput(int[] input) {
-    Console.KeyCode key = Console.KeyCode.fromBytes(input);
+    var key = Console.KeyCode.fromBytes(input);
 
     if (key != null) {
       switch (key) {
@@ -400,7 +397,7 @@ public class Game {
   }
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    Game game = new Game();
+    var game = new Game();
     game.run();
   }
 
@@ -414,7 +411,7 @@ public class Game {
       case ARROW_DOWN: selected = Math.min(selected + 1, options.length - 1); return true;
       case ENTER:
         try {
-          final Consumer<Game> action =
+          var action =
             (Consumer<Game>)options[selected].getClass().getField("action").get(
               options[selected]
             );

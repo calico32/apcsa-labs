@@ -5,7 +5,6 @@ import static shared.TextHelpers.*;
 import java.util.Date;
 
 import shared.Console;
-import shared.TextBuilder;
 
 class DisplayThread extends Thread {
   public final int round;
@@ -28,7 +27,7 @@ class DisplayThread extends Thread {
     Console.clear();
 
     this.start = new Date();
-    print();
+    display();
     while (elapsedTime() < time) {
       try {
         synchronized (this) { wait(Math.min(100, time - elapsedTime())); }
@@ -41,10 +40,10 @@ class DisplayThread extends Thread {
     onTimeout.run();
   }
 
-  public void print() {
-    Date now    = new Date();
-    int elapsed = (int)(now.getTime() - start.getTime());
-    TextBuilder.print(
+  public void display() {
+    var now     = new Date();
+    var elapsed = (int)(now.getTime() - start.getTime());
+    print(
       text("Round " + round + "\n").randomRainbow(),
       text("Time remaining: ").bold(),
       text(Math.round(elapsed / 100.0) * 10 + " seconds\n"),
@@ -55,9 +54,7 @@ class DisplayThread extends Thread {
 
   public void updateTimer() {
     Console.moveCursor(0, 2);
-    TextBuilder.print(text("Time remaining: ").bold());
-    TextBuilder.print(
-      text(Math.round((time - elapsedTime()) / 100.0) / 10d + " seconds\n")
-    );
+    print(text("Time remaining: ").bold());
+    print(text(Math.round((time - elapsedTime()) / 100.0) / 10d + " seconds\n"));
   }
 }

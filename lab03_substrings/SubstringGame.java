@@ -9,10 +9,10 @@ import shared.Text;
 
 public class SubstringGame {
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
+    var scanner = new Scanner(System.in);
 
     println(text("Substring game").bold().randomRainbow());
-    System.out.println();
+    println();
     println(text("Welcome to the substring game!").bold());
     println(
       text("You will be given a text and a substring. "),
@@ -24,14 +24,14 @@ public class SubstringGame {
       ),
       text("Good luck!")
     );
-    System.out.println();
+    println();
 
     while (true) {
-      Text text = promptText(scanner);
+      var text = promptText(scanner);
       Console.clear();
       playGame(scanner, text);
 
-      System.out.println();
+      println();
 
       println(
         text("Play again? [").bold(),
@@ -43,7 +43,7 @@ public class SubstringGame {
 
       print(text("> ").blue().bold());
 
-      String input = scanner.nextLine().trim();
+      var input = scanner.nextLine().trim();
 
       if (!input.equals("y") && !input.equals("")) {
         break;
@@ -66,31 +66,30 @@ public class SubstringGame {
     );
 
     // calculate substring length, which scales with text length and is capped at 100
-    int substringLength = Math.min(100, (int)(text.length * 0.1));
+    var substringLength = Math.min(100, (int)(text.length * 0.1));
 
-    int substringIndex = (int)(Math.random() * (text.length - substringLength));
+    var substringIndex = (int)(Math.random() * (text.length - substringLength));
 
     // if the substring has spaces nearby, advance the substring index to the next space
-    final int nextSpace = text.content.indexOf(' ', substringIndex);
+    final var nextSpace = text.content.indexOf(' ', substringIndex);
     if (nextSpace != -1 && nextSpace < substringIndex + substringLength && nextSpace + substringLength < text.length) {
       substringIndex = nextSpace + 1;
     }
 
-    final String substring =
+    final var substring =
       text.content.substring(substringIndex, substringIndex + substringLength).trim();
 
-    final int correctIndex = text.content.indexOf(substring);
+    final var correctIndex = text.content.indexOf(substring);
 
     println(text("...").dim(), text(substring).italic(), text("...").dim());
 
-    System.out.println();
+    println();
 
     int response;
-
-    int hints           = 0;
-    int hintLow         = 0;
-    int hintHigh        = text.length;
-    boolean answerGiven = false;
+    var hints       = 0;
+    var hintLow     = 0;
+    var hintHigh    = text.length;
+    var answerGiven = false;
 
     while (true) {
       print(text("What index is the substring at? ").bold());
@@ -106,7 +105,7 @@ public class SubstringGame {
 
       print(text("> ").blue().bold());
 
-      String input = scanner.nextLine().trim();
+      var input = scanner.nextLine().trim();
 
       if (input.equals("giveup")) {
         println(
@@ -124,7 +123,7 @@ public class SubstringGame {
           continue;
         }
 
-        int hintIndex = (hintLow + hintHigh) / 2;
+        var hintIndex = (hintLow + hintHigh) / 2;
 
         if (hintIndex < correctIndex) {
           hintLow = hintIndex + 1;
@@ -162,7 +161,7 @@ public class SubstringGame {
           throw new NumberFormatException();
         }
 
-        int score =
+        var score =
           answerGiven ? 0 : getScore(response, correctIndex, text.length, hints);
 
         println(
@@ -190,9 +189,9 @@ public class SubstringGame {
   public static Text promptText(Scanner scanner) {
     println(text("Select a text:").bold());
 
-    int index = 0;
+    var index = 0;
     while (index < Text.examples.length) {
-      Text text = Text.examples[index++];
+      var text = Text.examples[index++];
       println(
         text(index + ". ").bold(),
         text(text.name),
@@ -205,7 +204,7 @@ public class SubstringGame {
     println(text(++index + ". ").bold(), text("Random"));
     println(text(++index + ". ").bold(), text("Supply your own text"));
 
-    System.out.println();
+    println();
 
     print(text("> ").blue().bold());
 
@@ -233,12 +232,12 @@ public class SubstringGame {
                 .bold());
       print(text("> ").blue().bold());
 
-      StringBuilder builder = new StringBuilder();
+      var builder = new StringBuilder();
       while (true) {
         if (!scanner.hasNextLine()) {
           break;
         }
-        String line = scanner.nextLine();
+        var line = scanner.nextLine();
         if (line.equals("[endtext]")) {
           break;
         }
@@ -259,13 +258,11 @@ public class SubstringGame {
 
   public static int getScore(int response, int actual, int length, int hints) {
     // difficulty coefficient (higher = easier)
-    final double z = 0.2;
+    var z = 0.2;
 
-    final double distance = Math.abs(response - actual);
-
-    final double log2Length = Math.log(length) / Math.log(2);
-
-    final double score =
+    var distance   = (double)Math.abs(response - actual);
+    var log2Length = Math.log(length) / Math.log(2);
+    var score =
       Math.max(0, Math.pow(Math.E, -distance / (z * length)) - (hints / log2Length));
 
     return (int)(score * 5000);

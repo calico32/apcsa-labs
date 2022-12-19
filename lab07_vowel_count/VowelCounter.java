@@ -39,19 +39,19 @@ public class VowelCounter {
 
   private static Text promptText() {
     Text text;
-    String input = Input.readString();
+    var input = Input.readString();
     if (input.equals("quit")) {
       System.exit(0);
     }
     try {
-      int index = Integer.parseInt(input) - 1;
+      var index = Integer.parseInt(input) - 1;
       if (index < 0 || index >= Text.examples.length) {
         throw new NumberFormatException();
       }
       text = Text.examples[index];
     } catch (NumberFormatException e) {
       while (true) {
-        String next = Input.readString();
+        var next = Input.readString();
         if (next.equals("[endtext]")) {
           break;
         }
@@ -66,13 +66,13 @@ public class VowelCounter {
   }
 
   static HashMap<Character, Integer> countCharacters(Text text) {
-    HashMap<Character, Integer> counts = new HashMap<>();
+    var counts = new HashMap<Character, Integer>();
     for (char c : text.content.toCharArray()) {
       if (!Character.isLetter(c) && !Character.isDigit(c)) {
         continue;
       }
 
-      char key = Character.toLowerCase(c);
+      var key = Character.toLowerCase(c);
 
       if (counts.containsKey(key)) {
         counts.put(key, counts.get(key) + 1);
@@ -84,12 +84,12 @@ public class VowelCounter {
   }
 
   private static void printHistograms(Text text) {
-    HashMap<Character, Integer> counts = countCharacters(text);
+    var counts = countCharacters(text);
 
     println();
     println();
 
-    Histogram h = new Histogram("Character counts: " + text.name);
+    var h = new Histogram("Character counts: " + text.name);
     h.setValuePlacement(ValuePlacement.INSIDE);
     h.setValueMode(ValueMode.BOTH);
 

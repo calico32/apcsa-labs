@@ -9,7 +9,7 @@ import shared.TextBuilder;
 
 public class TempConverter {
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
+    var scanner = new Scanner(System.in);
 
     println(text("Temperature converter").randomRainbow().bold());
 
@@ -49,10 +49,9 @@ public class TempConverter {
         continue;
       }
 
-      String[] parts = input.split("\\s+");
+      var parts = input.split("\\s+");
 
-      String from;
-      String to;
+      String from, to;
 
       if (parts.length == 4) {
         if (!parts[2].equalsIgnoreCase("to")) {
@@ -84,15 +83,13 @@ public class TempConverter {
       }
 
       try {
-        String fromValueString = from.replaceAll("[^0-9.-]", "");
-        String fromUnitString  = from.replaceAll("[^a-zA-Z]", "");
+        var fromValueString = from.replaceAll("[^0-9.-]", "");
+        var fromUnitString  = from.replaceAll("[^a-zA-Z]", "");
 
-        double fromValue  = Double.parseDouble(fromValueString);
-        TempUnit fromUnit = TempUnit.fromString(fromUnitString);
-
-        TempUnit toUnit = TempUnit.fromString(to);
-
-        double toValue = fromUnit.convert(fromValue, toUnit);
+        var fromValue = Double.parseDouble(fromValueString);
+        var fromUnit  = TempUnit.fromString(fromUnitString);
+        var toUnit    = TempUnit.fromString(to);
+        var toValue   = fromUnit.convert(fromValue, toUnit);
 
         println(
           text("%.2f", fromValue).blue().bold(),
