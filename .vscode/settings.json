@@ -1,3 +1,4 @@
 {
-  "java.project.referencedLibraries": ["deps/**/*.jar"]
+  "java.project.referencedLibraries": ["deps/**/*.jar"],
+  "java.inlayHints.parameterNames.enabled": "none"
 }

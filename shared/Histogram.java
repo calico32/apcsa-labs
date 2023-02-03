@@ -29,10 +29,16 @@ public class Histogram {
   public Orientation orientation       = Orientation.HORIZONTAL;
   public ValueMode valueMode           = ValueMode.ABSOLUTE;
   public ValuePlacement valuePlacement = ValuePlacement.OUTSIDE;
+  private Console.Size consoleSize;
 
   public Histogram(String title) {
     this.title      = title;
     this.categories = new ArrayList<>();
+  }
+
+  public Histogram setSize(Console.Size consoleSize) {
+    this.consoleSize = consoleSize;
+    return this;
   }
 
   public Histogram setTitle(String title) {
@@ -60,29 +66,35 @@ public class Histogram {
     return this;
   }
 
-  public void display() {
-    println(text(title).blue().bold());
-
-    if (categories.size() == 0) {
-      System.out.println("No entries exist.");
-      return;
+  public String draw() { return draw(null); }
+  public String draw(Number max) {
+    var output = new StringBuilder();
+    if (title != null) {
+      output.append(text(title).blue().bold() + "\n");
     }
 
-    DecimalFormat df = new DecimalFormat("###,###.##");
+    if (categories.size() == 0) {
+      output.append("No entries exist.\n");
+      return output.toString();
+    }
+
+    var df = new DecimalFormat("###,###.##");
     df.setRoundingMode(RoundingMode.DOWN);
     df.setGroupingUsed(true);
 
-    Console.Size consoleSize = Console.getSize();
+    var consoleSize = this.consoleSize != null ? this.consoleSize : Console.getSize();
 
     int nameWidth = Math.min(
       categories.stream().mapToInt(c -> c.name.length()).max().getAsInt(),
       consoleSize.width / 2
     );
 
-    Double maxValue = categories.stream().mapToDouble(c -> c.value).max().getAsDouble();
+    var maxValue = max != null
+      ? max.doubleValue()
+      : categories.stream().mapToDouble(c -> c.value).max().getAsDouble();
 
-    String[] values = new String[categories.size()];
-    for (Category category : categories) {
+    var values = new String[categories.size()];
+    for (var category : categories) {
       switch (valueMode) {
         case ABSOLUTE:
           values[categories.indexOf(category)] = df.format(category.value);
@@ -98,26 +110,26 @@ public class Histogram {
       }
     }
 
-    int valueWidth = valuePlacement != ValuePlacement.NONE
+    var valueWidth = valuePlacement != ValuePlacement.NONE
       ? categories.stream()
           .mapToInt(c -> values[categories.indexOf(c)].length())
           .max()
           .getAsInt()
       : 0;
 
-    int barWidth = orientation == Orientation.HORIZONTAL
+    var barWidth = orientation == Orientation.HORIZONTAL
       ? consoleSize.width - valueWidth - 2 -
         (valuePlacement == ValuePlacement.OUTSIDE ? valueWidth : 0)
       : consoleSize.height - categories.size() - 1;
 
-    int resolution = barWidth * 8;
+    var resolution = barWidth * 8;
 
     if (orientation == Orientation.HORIZONTAL) {
       for (int i = 0; i < categories.size(); i++) {
-        Category category = categories.get(i);
-        int eighths       = (int)Math.round(category.value / maxValue * resolution);
-        int fullBars      = eighths / 8;
-        int lastBarIndex  = eighths % 8;
+        var category     = categories.get(i);
+        var eighths      = (int)Math.round(category.value / maxValue * resolution);
+        int fullBars     = eighths / 8;
+        int lastBarIndex = eighths % 8;
         char lastBar;
         if (lastBarIndex == 0) {
           if (fullBars == 0) {
@@ -130,29 +142,34 @@ public class Histogram {
           lastBar = horizontalBars.charAt(lastBarIndex);
         }
 
-        print(text("%-" + nameWidth + "s ", Util.truncate(category.name, nameWidth)));
+        output.append(
+          text("%-" + nameWidth + "s ", Util.truncate(category.name, nameWidth))
+        );
 
         if (valuePlacement != ValuePlacement.INSIDE || fullBars < valueWidth + 1) {
-          print(
+          output.append(
             text(Character.toString(fullBlock).repeat(fullBars) + lastBar).blackBright()
           );
           if (valuePlacement != ValuePlacement.NONE) {
-            print(text(" " + values[i]).white());
+            output.append(text(" " + values[i]).white());
           }
-          println();
+          output.append("\n");
         } else {
-          String thisValue = values[i];
-          println(
+          var thisValue = values[i];
+          output.append(
             text(Character.toString(fullBlock).repeat(fullBars - thisValue.length()))
-              .blackBright(),
-            text(thisValue).white().bgBlackBright(),
-            text(lastBar).blackBright()
+              .blackBright()
+              .toString() +
+            text(thisValue).white().bgBlackBright() + text(lastBar).blackBright()
           );
+          output.append("\n");
         }
       }
     } else {
       // TODO vertical
-      println("todo lmao");
+      output.append("todo lmao\n");
     }
+
+    return output.toString();
   }
 }

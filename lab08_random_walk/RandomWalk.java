@@ -9,9 +9,8 @@ import java.util.function.Function;
 
 import shared.Console;
 import shared.Console.KeyCode;
+import shared.Direction;
 import shared.TextSegment;
-
-import lab08_random_walk.Path.Direction;
 
 public class RandomWalk {
   public static void main(String[] args) throws IOException, InterruptedException {

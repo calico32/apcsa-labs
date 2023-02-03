@@ -97,7 +97,7 @@ public class VowelCounter {
       .stream()
       .sorted((a, b) -> a.getKey() - b.getKey())
       .forEach(e -> h.addCategory(String.valueOf(e.getKey()), e.getValue()));
-    h.display();
+    println(h.draw());
     h.clear();
 
     println();
@@ -108,7 +108,7 @@ public class VowelCounter {
       .stream()
       .sorted((a, b) -> b.getValue() - a.getValue())
       .forEach(e -> h.addCategory(String.valueOf(e.getKey()), e.getValue()));
-    h.display();
+    println(h.draw());
     h.clear();
 
     println();
@@ -121,7 +121,7 @@ public class VowelCounter {
         h.addCategory(String.valueOf(c), counts.get(c));
       }
     }
-    h.display();
+    println(h.draw());
     h.clear();
   }
 }
