@@ -5,6 +5,8 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import shared.Input;
+
 import lab01_temp_converter.TempConverter;
 import lab02_number_cubes.LibreYachts;
 import lab03_substrings.SubstringGame;
@@ -14,6 +16,8 @@ import lab06_loops.HighLowGame;
 import lab07_vowel_count.VowelCounter;
 import lab08_random_walk.RandomWalk;
 import lab09_integer_sequence.IntegerSequence;
+import lab10_classes.DatingGame;
+import lab11_arrays.IntegerCounter;
 
 class Main {
   static class Program {
@@ -41,6 +45,8 @@ class Main {
     program("Character/vowel counter", VowelCounter.class);
     program("Random walk simulator", RandomWalk.class);
     program("Integer sequence", IntegerSequence.class);
+    program("Karuta date game (WIP)", DatingGame.class);
+    program("Integer counter", IntegerCounter.class);
     program("Exit", Exit.class);
   }
 
@@ -57,15 +63,12 @@ class Main {
     }
 
     System.out.println();
-    System.out.print("> ");
 
     try {
-      var choice       = scanner.nextInt();
+      var choice       = Input.readInt(1, programs.size());
       var programClass = programs.get(choice - 1).cls;
       print(text("\n---------------\n\n").dim());
       programClass.getMethod("main", String[].class).invoke(null, (Object)args);
-    } catch (IndexOutOfBoundsException e) {
-      println(text("\nInvalid choice.").red());
     } catch (InputMismatchException e) {
       println(text("\nInvalid choice.").red());
     } catch (NoSuchElementException e) {
