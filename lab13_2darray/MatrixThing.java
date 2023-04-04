@@ -45,6 +45,8 @@ public class MatrixThing {
         println();
         println(text("transposed:"));
         displayArray(transpose(array));
+        println();
+        println(text("largest: %d", findLargest(array)));
     }
 
     public static void displayArray(int[][] array) {
@@ -92,5 +94,17 @@ public class MatrixThing {
         }
 
         return transposed;
+    }
+
+    public static int findLargest(int[][] array) {
+        int largest = array[0][0];
+        for (int[] row : array) {
+            for (int cell : row) {
+                if (cell > largest) {
+                    largest = cell;
+                }
+            }
+        }
+        return largest;
     }
 }

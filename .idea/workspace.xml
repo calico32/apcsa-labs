@@ -4,71 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a65c4f3-f846-4cb1-8d86-addd41d1b0ab" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.replit" beforeDir="false" afterPath="$PROJECT_DIR$/.replit" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configure" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab01_temp_converter/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab01_temp_converter/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab01_temp_converter/TempConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab01_temp_converter/TempConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab01_temp_converter/TempUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab01_temp_converter/TempUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab01_temp_converter/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/Hand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/LibreYachts.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/LibreYachts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/NumberCube.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/NumberCube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/Scoresheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/Scoresheet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategoryOfAKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategoryOfAKind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategoryStraight.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategoryStraight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategoryUpper.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab02_number_cubes/roll_category/RollCategoryUpper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab03_substrings/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab03_substrings/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab03_substrings/SubstringGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab03_substrings/SubstringGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab03_substrings/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab04_leap_years/DisplayThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab04_leap_years/DisplayThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab04_leap_years/LeapYears.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab04_leap_years/LeapYears.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab04_leap_years/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab04_leap_years/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab04_leap_years/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab05_strings/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab05_strings/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab05_strings/StringSorter.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab05_strings/StringSorter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab05_strings/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab06_loops/HighLowGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab06_loops/HighLowGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab06_loops/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab07_vowel_count/VowelCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab07_vowel_count/VowelCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab07_vowel_count/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab08_random_walk/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab08_random_walk/Path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab08_random_walk/Point.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab08_random_walk/RandomWalk.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab08_random_walk/RandomWalk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab08_random_walk/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab09_integer_sequence/IntegerSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab09_integer_sequence/IntegerSequence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab09_integer_sequence/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab10_classes/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab10_classes/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab10_classes/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/CellType.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab10_classes/CellType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/DatingGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab10_classes/DatingGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab10_classes/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab10_classes/Partner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab10_classes/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab11_arrays/IntegerCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab11_arrays/IntegerCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab11_arrays/config.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/Direction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/QuickSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/res/bee_movie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/bee_movie.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/res/digits_of_pi.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/digits_of_pi.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/res/fitnessgram_pacer_test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/fitnessgram_pacer_test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/res/history_of_the_entire_world.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/history_of_the_entire_world.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/res/lorem_ipsum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/lorem_ipsum.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/res/steamed_hams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/steamed_hams.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/res/the_lego_movie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/the_lego_movie.txt" afterDir="false" />
+    <list default="true" id="5a65c4f3-f846-4cb1-8d86-addd41d1b0ab" name="Changes" comment="use gradle">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,12 +223,42 @@
       <workItem from="1677868624960" duration="2088000" />
       <workItem from="1679249459305" duration="4912000" />
       <workItem from="1680264495091" duration="6579000" />
-      <workItem from="1680612492756" duration="5129000" />
+      <workItem from="1680612492756" duration="5928000" />
     </task>
+    <task id="LOCAL-00001" summary="use gradle">
+      <created>1680625208793</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680625208793</updated>
+    </task>
+    <task id="LOCAL-00002" summary="use gradle">
+      <created>1680625236728</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680625236728</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="use gradle" />
+    <option name="LAST_COMMIT_MESSAGE" value="use gradle" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
