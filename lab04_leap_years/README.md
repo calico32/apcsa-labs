@@ -9,7 +9,7 @@ A game where you answer questions about what years are leap years while being ti
 
 ## Running
 
-[![Run on Repl.it](https://repl.it/badge/github/wiisportsresort/apcsa-labs)](https://repl.it/@wiisportsresort/apcsa-labs)
+[![Run on Repl.it](https://repl.it/badge/github/calico32/apcsa-labs)](https://repl.it/@calico32/apcsa-labs)
 
 Generate a new `Makefile` from the repo root (only needed once):
 

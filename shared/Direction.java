@@ -1,7 +1,5 @@
 package shared;
 
-import lab08_random_walk.Point;
-
 public enum Direction {
   NORTH(0, -1, '↑', '^', '⬆'),
   SOUTH(0, 1, '↓', 'v', '⬇'),

@@ -1,4 +1,8 @@
 {
-  "java.project.referencedLibraries": ["deps/**/*.jar"],
-  "java.inlayHints.parameterNames.enabled": "none"
+  "java.inlayHints.parameterNames.enabled": "none",
+  "java.import.gradle.enabled": true,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "[kotlin]": {
+    "editor.formatOnSave": false
+  }
 }

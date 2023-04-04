@@ -1,5 +1,5 @@
-run = "make"
-hidden = ["build", ".*", "**/Makefile", "**/config.in", "Makefile.in", "LICENSE", "**/*.class"]
+run = "./gradlew run"
+hidden = ["build", ".*", "**/Makefile", "**/config.in", "*.gradle", "gradle", ".gradle", "LICENSE", "**/*.class"]
 
 [languages.java]
 pattern = "**/*.java"

@@ -1,0 +1,10 @@
+rootProject.name = "apcsa-labs"
+
+//include("shared")
+//
+//// find all directories called "lab*" and add them as subprojects
+//file(".").listFiles { file -> file.isDirectory && file.name.matches(Regex("lab\\d+_.+")) }.forEach { file ->
+//    include(file.name)
+//}
+//
+//include("app")

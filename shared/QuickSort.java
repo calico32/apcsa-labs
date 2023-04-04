@@ -8,7 +8,7 @@ public class QuickSort<T> {
 
   BiFunction<T, T, Boolean> compare;
 
-  public static final <T> BiFunction<T, T, Boolean> strings() {
+  public static <T> BiFunction<T, T, Boolean> strings() {
     return (a, b) -> {
       int index   = 0;
       String aStr = a.toString();

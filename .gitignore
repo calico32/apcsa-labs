@@ -10,4 +10,8 @@ replit.nix
 .vscode/launch.json
 .c_cpp
 
-lab*/Makefile
+# Ignore Gradle project-specific cache directory
+.gradle
+
+lab*/bin
+shared/bin

@@ -1,0 +1,99 @@
+plugins {
+    id("java")
+    id("application")
+    id("idea")
+}
+
+repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
+
+application {
+    mainClass.set("app.Main")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_19
+    targetCompatibility = JavaVersion.VERSION_19
+}
+
+var labs = file(".")
+    .listFiles()
+    .collect {
+        if (!it.isDirectory()) return null
+        var m = it.name =~ ~/^lab(\d+)_.+$/
+        if (!m.find(0)) return null
+        var lab = m.group(1).toInteger()
+        return [name: it.name, lab: lab]
+    }
+    .findAll { it != null }
+    .sort { a, b -> a.lab - b.lab }
+
+// println("Found labs: " + labs.collect { it.name }.join(", "))
+
+sourceSets {
+    main {
+        java {
+            srcDir(".")
+        }
+
+        resources {
+            var dirs = ["res"]
+            labs.forEach { dirs.add(String.format("%s/res", it.name)) }
+            srcDirs(dirs)
+        }
+    }
+}
+
+dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.14.2")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+    implementation("com.googlecode.lanterna:lanterna:3.1.1")
+    implementation("me.xdrop:fuzzywuzzy:1.4.0")
+}
+
+
+compileJava {
+    dependsOn("processResources")
+}
+
+labs.forEach {l ->
+    tasks.register(l.lab.toString(), JavaExec) {
+        dependsOn("classes")
+
+        standardInput = System.in
+        classpath = sourceSets.main.runtimeClasspath
+        mainClass = "app.Main"
+        args = [l.lab.toString()]
+    }
+}
+
+run {
+    standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes(
+            "Main-Class": "app.Main",
+            "Class-Path": sourceSets.main.runtimeClasspath.join(" ")
+        )
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file(".")
+        resourceDirs += file("res")
+        excludeDirs += file("build")
+        labs.forEach { l ->
+            resourceDirs += file(l.name + "/res")
+            excludeDirs += file(l.name + "/bin")
+        }
+
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
